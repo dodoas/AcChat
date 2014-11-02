@@ -1,4 +1,0 @@
-AcChat
-======
-
-Accounting Chat
