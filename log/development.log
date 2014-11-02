@@ -4,3 +4,16 @@ Started GET "/" for 127.0.0.1 at 2014-11-02 22:07:11 +0100
 Processing by Rails::WelcomeController#index as HTML
   Rendered /home/popac/.rbenv/versions/2.1.4/lib/ruby/gems/2.1.0/gems/railties-4.1.7/lib/rails/templates/rails/welcome/index.html.erb (5.0ms)
 Completed 200 OK in 78ms (Views: 35.2ms | ActiveRecord: 0.0ms)
+  [1m[36m (12.9ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [1m[35m (72.6ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to DeviseCreateUsers (20141102213539)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (84.6ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "email" character varying(255) DEFAULT '' NOT NULL, "encrypted_password" character varying(255) DEFAULT '' NOT NULL, "reset_password_token" character varying(255), "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" inet, "last_sign_in_ip" inet, "confirmation_token" character varying(255), "confirmed_at" timestamp, "confirmation_sent_at" timestamp, "unconfirmed_email" character varying(255), "failed_attempts" integer DEFAULT 0 NOT NULL, "unlock_token" character varying(255), "locked_at" timestamp, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (39.8ms)[0m  CREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")
+  [1m[36m (40.2ms)[0m  [1mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  [1m[35m (40.2ms)[0m  CREATE UNIQUE INDEX  "index_users_on_confirmation_token" ON "users"  ("confirmation_token")
+  [1m[36m (40.2ms)[0m  [1mCREATE UNIQUE INDEX  "index_users_on_unlock_token" ON "users"  ("unlock_token")[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141102213539"]]
+  [1m[36m (22.8ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (8.0ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
