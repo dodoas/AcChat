@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= content_for?(:title) ? yield(:title) : "AcChat" %></title>
+  <%= csrf_meta_tags %>
+
+  <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+  <!--[if lt IE 9]>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js" type="text/javascript"></script>
+  <![endif]-->
+
+  <%= stylesheet_link_tag "application", :media => "all" %>
+
+  <!-- For third-generation iPad with high-resolution Retina display: -->
+  <!-- Size should be 144 x 144 pixels -->
+  <%= favicon_link_tag 'apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144' %>
+
+  <!-- For iPhone with high-resolution Retina display: -->
+  <!-- Size should be 114 x 114 pixels -->
+  <%= favicon_link_tag 'apple-touch-icon-114x114-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114' %>
+
+  <!-- For first- and second-generation iPad: -->
+  <!-- Size should be 72 x 72 pixels -->
+  <%= favicon_link_tag 'apple-touch-icon-72x72-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '72x72' %>
+
+  <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+  <!-- Size should be 57 x 57 pixels -->
+  <%= favicon_link_tag 'apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png' %>
+
+  <!-- For all other devices -->
+  <!-- Size should be 32 x 32 pixels -->
+  <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
+
+  <%= javascript_include_tag "application" %>
+  <style>
+      body {
+          background-color: #f2f2f2;
+          font-family: 'Lato', sans-serif;
+          font-weight: 300;
+          font-size: 16px;
+          color: #555;
+
+          -webkit-font-smoothing: antialiased;
+          -webkit-overflow-scrolling: touch;
+      }
+
+      /* Titles */
+      h1, h2, h3, h4, h5, h6 {
+          font-family: 'Lato', sans-serif;
+          font-weight: 300;
+          color: #333;
+      }
+
+      h1 {
+          font-size: 40px;
+      }
+
+      h3 {
+          color: #95a5a6;
+          font-weight: 400;
+      }
+
+      h4 {
+          color: #95a5a6;
+          font-weight: 400;
+          font-size: 20px;
+      }
+
+      /* Paragraph & Typographic */
+      p {
+          line-height: 28px;
+          margin-bottom: 25px;
+          font-size: 16px;
+      }
+
+      .centered {
+          text-align: center;
+      }
+
+      /* Links */
+      a {
+          color: #3498db;
+          word-wrap: break-word;
+
+          -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
+          -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
+          -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
+          -o-transition: color 0.1s ease-in, background 0.1s ease-in;
+          transition: color 0.1s ease-in, background 0.1s ease-in;
+      }
+
+      a:hover,
+      a:focus {
+          color: #7b7b7b;
+          text-decoration: none;
+          outline: 0;
+      }
+
+      a:before,
+      a:after {
+          -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
+          -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
+          -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
+          -o-transition: color 0.1s ease-in, background 0.1s ease-in;
+          transition: color 0.1s ease-in, background 0.1s ease-in;
+      }
+
+      hr {
+          display: block;
+          height: 1px;
+          border: 0;
+          border-top: 1px solid #ccc;
+          margin: 1em 0;
+          padding: 0;
+      }
+
+      .navbar-default {
+          background-color: #3498db;
+          border-color: transparent;
+      }
+
+      .navbar-default .navbar-brand {
+          color: white;
+      }
+
+      .navbar-default .navbar-nav > li > a {
+          color: white;
+      }
+
+      /* Helpers */
+
+      .mt {
+          margin-top: 40px;
+          margin-bottom: 40px;
+      }
+
+      .form-control {
+          height: 42px;
+          font-size: 18px;
+          width: 280px;
+      }
+
+      i {
+          margin: 8px;
+          color: #3498db;
+      }
+
+      /* HeaderWrap */
+      #headerwrap {
+          /* background: url(../img/bg01.jpg) no-repeat center top; */
+          background-color: #3498db;
+          margin-top: -20px;
+          padding-top: 200px;
+          background-attachment: relative;
+          background-position: center center;
+          min-height: 650px;
+          width: 100%;
+
+          -webkit-background-size: 100%;
+          -moz-background-size: 100%;
+          -o-background-size: 100%;
+          background-size: 100%;
+
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+      }
+
+      #headerwrap h1 {
+          margin-top: 60px;
+          margin-bottom: 15px;
+          color: white;
+          font-size: 45px;
+          font-weight: 300;
+          letter-spacing: 1px;
+      }
+  </style>
+</head>
+<body>
+<div id="headerwrap">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <h1>Track your business</h1>
+        <%= bootstrap_flash %>
+        <%= yield %>
+      </div>
+      <div class="col-lg-6">
+        <%= image_tag("ipad-hand.png") %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row mt centered">
+    <div class="col-lg-6 col-lg-offset-3">
+      <h1>Customer support</h1>
+      <h3>Be always aware of your business</h3>
+    </div>
+  </div>
+  <div class="row mt centered">
+    <div class="col-lg-4">
+      <%= image_tag("ser01.png", size: "180") %>
+      <h4>1 - Browser</h4>
+      <p>Access the application using any browser</p>
+    </div>
+    <div class="col-lg-4">
+<%= image_tag("ser02.png", size: "180") %>
+      <h4>2 - Email</h4>
+      <p>Watch your e mail messages and conversations</p>
+    </div>
+    <div class="col-lg-4">
+<%= image_tag("ser03.png", size: "180") %>
+      <h4>3 - Files and Documents</h4>
+      <p>Share files and documents</p>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <hr>
+  <p class="centered"> <a href="http://www.fakturabank.no/account/login" target="_blank">Dodo As</a> <%= Time.now.year %></p>
+</div>
+</body>
+</html>
