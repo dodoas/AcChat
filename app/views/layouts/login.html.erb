@@ -137,12 +137,6 @@
           margin-bottom: 40px;
       }
 
-      .form-control {
-          height: 42px;
-          font-size: 18px;
-          width: 280px;
-      }
-
       i {
           margin: 8px;
           color: #3498db;
@@ -178,6 +172,9 @@
           font-weight: 300;
           letter-spacing: 1px;
       }
+          .problems {
+              display: none;
+          }
   </style>
 </head>
 <body>
@@ -185,12 +182,19 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-6">
-        <h1>Track your business</h1>
-        <%= bootstrap_flash %>
-        <%= yield %>
+        <table>
+          <tr>
+            <td></td>
+            <td>
+              <h1>Track your business</h1>
+              <%= bootstrap_flash %>
+              <%= yield %>
+            </td>
+          </tr>
+        </table>
       </div>
       <div class="col-lg-6">
-        <%= image_tag("ipad-hand.png") %>
+        <%= image_tag("ipad-hand.png")%>
       </div>
     </div>
   </div>
