@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Recipient:</strong>
+  <%= @email.recipient %>
+</p>
+
+<p>
+  <strong>Title of the message:</strong>
+  <%= @email.title_of_the_message %>
+</p>
+
+<p>
+  <strong>Message body:</strong>
+  <%= @email.message_body %>
+</p>
+
+<p>
+  <strong>Sender:</strong>
+  <%= @email.sender %>
+</p>
+
+<%= link_to 'Edit', edit_email_path(@email) %> |
+<%= link_to 'Back', emails_path %>
