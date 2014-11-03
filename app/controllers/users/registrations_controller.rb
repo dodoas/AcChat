@@ -1,6 +1,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   before_filter :configure_sign_up_params, only: [:create]
   before_filter :configure_account_update_params, only: [:update]
+  before_filter :registration_new_sanitized_params, if: :devise_controller?
 
   # GET /resource/sign_up
   def new
@@ -57,4 +58,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def after_inactive_sign_up_path_for(resource)
     super(resource)
   end
+
+  def registration_new_sanitized_params
+    devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:firs_tname, :last_name, :email, :password, :password_confirmation)}
+    # @plan_name = Plan.where(:id=> params[:plan_id]).pluck(:name)
+  end
+
 end
