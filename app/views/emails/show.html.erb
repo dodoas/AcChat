@@ -6,18 +6,13 @@
 </p>
 
 <p>
-  <strong>Title of the message:</strong>
-  <%= @email.title_of_the_message %>
+  <strong>Message subject:</strong>
+  <%= @email.message_subject %>
 </p>
 
 <p>
   <strong>Message body:</strong>
   <%= @email.message_body %>
-</p>
-
-<p>
-  <strong>Sender:</strong>
-  <%= @email.sender %>
 </p>
 
 <%= link_to 'Edit', edit_email_path(@email) %> |

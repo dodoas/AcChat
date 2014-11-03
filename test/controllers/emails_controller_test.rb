@@ -18,7 +18,7 @@ class EmailsControllerTest < ActionController::TestCase
 
   test "should create email" do
     assert_difference('Email.count') do
-      post :create, email: { message_body: @email.message_body, recipient_id: @email.recipient_id, sender_id: @email.sender_id, title_of_the_message: @email.title_of_the_message }
+      post :create, email: { message_body: @email.message_body, message_subject: @email.message_subject, recipient_id: @email.recipient_id }
     end
 
     assert_redirected_to email_path(assigns(:email))
@@ -35,7 +35,7 @@ class EmailsControllerTest < ActionController::TestCase
   end
 
   test "should update email" do
-    patch :update, id: @email, email: { message_body: @email.message_body, recipient_id: @email.recipient_id, sender_id: @email.sender_id, title_of_the_message: @email.title_of_the_message }
+    patch :update, id: @email, email: { message_body: @email.message_body, message_subject: @email.message_subject, recipient_id: @email.recipient_id }
     assert_redirected_to email_path(assigns(:email))
   end
 

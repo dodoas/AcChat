@@ -11,18 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141103134415) do
+ActiveRecord::Schema.define(version: 20141103142540) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "emails", force: true do |t|
     t.integer  "recipient_id"
-    t.string   "title_of_the_message"
+    t.string   "message_subject"
     t.text     "message_body"
-    t.integer  "sender_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "sender_id"
   end
 
   add_index "emails", ["recipient_id"], name: "index_emails_on_recipient_id", using: :btree

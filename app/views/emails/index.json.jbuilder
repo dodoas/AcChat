@@ -1,4 +1,4 @@
 json.array!(@emails) do |email|
-  json.extract! email, :id, :recipient_id, :title_of_the_message, :message_body, :sender_id
+  json.extract! email, :id, :recipient_id, :message_subject, :message_body
   json.url email_url(email, format: :json)
 end

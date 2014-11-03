@@ -2,12 +2,10 @@
 
 one:
   recipient_id: 
-  title_of_the_message: MyString
+  message_subject: MyString
   message_body: MyText
-  sender_id: 
 
 two:
   recipient_id: 
-  title_of_the_message: MyString
+  message_subject: MyString
   message_body: MyText
-  sender_id: 
