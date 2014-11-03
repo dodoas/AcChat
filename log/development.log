@@ -32829,3 +32829,368 @@ Started GET "/assets/bootstrap.min.css" for 127.0.0.1 at 2014-11-03 14:27:32 +01
 
 
 Started GET "/assets/vector-viking-shaded.png" for 127.0.0.1 at 2014-11-03 14:27:32 +0100
+
+
+Started GET "/users/edit" for 127.0.0.1 at 2014-11-03 14:31:05 +0100
+Processing by Devise::RegistrationsController#edit as HTML
+  [1m[35mUser Load (0.7ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 5  ORDER BY "users"."id" ASC LIMIT 1
+  Rendered users/registrations/edit.html.erb within layouts/application (8.6ms)
+Completed 200 OK in 400ms (Views: 370.6ms | ActiveRecord: 3.7ms)
+
+
+Started GET "/assets/application-layout.css?body=1" for 127.0.0.1 at 2014-11-03 14:31:06 +0100
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2014-11-03 14:31:06 +0100
+
+
+Started GET "/assets/bootstrap.min.css?body=1" for 127.0.0.1 at 2014-11-03 14:31:06 +0100
+
+
+Started GET "/assets/dashboard.css?body=1" for 127.0.0.1 at 2014-11-03 14:31:06 +0100
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:06 +0100
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-11-03 14:31:06 +0100
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:06 +0100
+
+
+Started GET "/assets/twitter/bootstrap/transition.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:06 +0100
+
+
+Started GET "/assets/twitter/bootstrap/dropdown.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:06 +0100
+
+
+Started GET "/assets/twitter/bootstrap/alert.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:06 +0100
+
+
+Started GET "/assets/twitter/bootstrap/modal.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:06 +0100
+
+
+Started GET "/assets/twitter/bootstrap/scrollspy.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:06 +0100
+
+
+Started GET "/assets/twitter/bootstrap/tooltip.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:06 +0100
+
+
+Started GET "/assets/twitter/bootstrap/tab.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:06 +0100
+
+
+Started GET "/assets/twitter/bootstrap/popover.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:06 +0100
+
+
+Started GET "/assets/twitter/bootstrap/button.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:06 +0100
+
+
+Started GET "/assets/twitter/bootstrap/carousel.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:06 +0100
+
+
+Started GET "/assets/twitter/bootstrap/collapse.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:06 +0100
+
+
+Started GET "/assets/twitter/bootstrap/affix.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:06 +0100
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:06 +0100
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:06 +0100
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:06 +0100
+
+
+Started GET "/assets/dashboard.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:06 +0100
+
+
+Started GET "/assets/bootstrap.min.css" for 127.0.0.1 at 2014-11-03 14:31:06 +0100
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:06 +0100
+
+
+Started GET "/assets/vector-viking-shaded.png" for 127.0.0.1 at 2014-11-03 14:31:06 +0100
+
+
+Started PUT "/users" for 127.0.0.1 at 2014-11-03 14:31:14 +0100
+Processing by Devise::RegistrationsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"6HY+hsL0Xo5Gk9QmwBu4uRqx/hpnGmwA46OGxJdxsRU=", "user"=>{"first_name"=>"A", "last_name"=>"df6g54dfg654dfg", "email"=>"pl@pl.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]"}, "commit"=>"Update"}
+  [1m[36mUser Load (0.8ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 5  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = $1 LIMIT 1  [["id", 5]]
+Unpermitted parameters: current_password
+  Rendered users/registrations/edit.html.erb within layouts/application (9.1ms)
+Completed 200 OK in 536ms (Views: 379.0ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/assets/bootstrap.min.css?body=1" for 127.0.0.1 at 2014-11-03 14:31:15 +0100
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2014-11-03 14:31:15 +0100
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-11-03 14:31:15 +0100
+
+
+Started GET "/assets/application-layout.css?body=1" for 127.0.0.1 at 2014-11-03 14:31:15 +0100
+
+
+Started GET "/assets/dashboard.css?body=1" for 127.0.0.1 at 2014-11-03 14:31:15 +0100
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:15 +0100
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:15 +0100
+
+
+Started GET "/assets/twitter/bootstrap/transition.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:15 +0100
+
+
+Started GET "/assets/twitter/bootstrap/alert.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:15 +0100
+
+
+Started GET "/assets/twitter/bootstrap/modal.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:15 +0100
+
+
+Started GET "/assets/twitter/bootstrap/tab.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:15 +0100
+
+
+Started GET "/assets/twitter/bootstrap/dropdown.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:15 +0100
+
+
+Started GET "/assets/twitter/bootstrap/scrollspy.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:15 +0100
+
+
+Started GET "/assets/twitter/bootstrap/tooltip.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:15 +0100
+
+
+Started GET "/assets/twitter/bootstrap/popover.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:15 +0100
+
+
+Started GET "/assets/twitter/bootstrap/button.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:15 +0100
+
+
+Started GET "/assets/twitter/bootstrap/collapse.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:15 +0100
+
+
+Started GET "/assets/twitter/bootstrap/carousel.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:15 +0100
+
+
+Started GET "/assets/twitter/bootstrap/affix.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:15 +0100
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:15 +0100
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:15 +0100
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:15 +0100
+
+
+Started GET "/assets/dashboard.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:15 +0100
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:15 +0100
+
+
+Started GET "/assets/bootstrap.min.css" for 127.0.0.1 at 2014-11-03 14:31:15 +0100
+
+
+Started GET "/assets/vector-viking-shaded.png" for 127.0.0.1 at 2014-11-03 14:31:15 +0100
+
+
+Started PUT "/users" for 127.0.0.1 at 2014-11-03 14:31:53 +0100
+Processing by Devise::RegistrationsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"6HY+hsL0Xo5Gk9QmwBu4uRqx/hpnGmwA46OGxJdxsRU=", "user"=>{"first_name"=>"Aleksandar", "last_name"=>"Popovic", "email"=>"pl@pl.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]"}, "commit"=>"Update"}
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 5  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = $1 LIMIT 1  [["id", 5]]
+Unpermitted parameters: current_password
+  Rendered users/registrations/edit.html.erb within layouts/application (8.3ms)
+Completed 200 OK in 528ms (Views: 382.8ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/assets/application-layout.css?body=1" for 127.0.0.1 at 2014-11-03 14:31:53 +0100
+
+
+Started GET "/assets/dashboard.css?body=1" for 127.0.0.1 at 2014-11-03 14:31:53 +0100
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2014-11-03 14:31:53 +0100
+
+
+Started GET "/assets/bootstrap.min.css?body=1" for 127.0.0.1 at 2014-11-03 14:31:53 +0100
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-11-03 14:31:53 +0100
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:53 +0100
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:53 +0100
+
+
+Started GET "/assets/twitter/bootstrap/transition.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:53 +0100
+
+
+Started GET "/assets/twitter/bootstrap/modal.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:53 +0100
+
+
+Started GET "/assets/twitter/bootstrap/alert.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:53 +0100
+
+
+Started GET "/assets/twitter/bootstrap/dropdown.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:53 +0100
+
+
+Started GET "/assets/twitter/bootstrap/scrollspy.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:53 +0100
+
+
+Started GET "/assets/twitter/bootstrap/popover.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:53 +0100
+
+
+Started GET "/assets/twitter/bootstrap/tab.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:53 +0100
+
+
+Started GET "/assets/twitter/bootstrap/tooltip.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:53 +0100
+
+
+Started GET "/assets/twitter/bootstrap/collapse.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:53 +0100
+
+
+Started GET "/assets/twitter/bootstrap/button.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:53 +0100
+
+
+Started GET "/assets/twitter/bootstrap/carousel.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:53 +0100
+
+
+Started GET "/assets/twitter/bootstrap/affix.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:53 +0100
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:53 +0100
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:53 +0100
+
+
+Started GET "/assets/dashboard.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:53 +0100
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:53 +0100
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-11-03 14:31:53 +0100
+
+
+Started GET "/assets/bootstrap.min.css" for 127.0.0.1 at 2014-11-03 14:31:53 +0100
+
+
+Started GET "/assets/vector-viking-shaded.png" for 127.0.0.1 at 2014-11-03 14:31:54 +0100
+
+
+Started PUT "/users" for 127.0.0.1 at 2014-11-03 14:32:41 +0100
+Processing by Devise::RegistrationsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"6HY+hsL0Xo5Gk9QmwBu4uRqx/hpnGmwA46OGxJdxsRU=", "user"=>{"first_name"=>"Aleksandar", "last_name"=>"Popovic", "email"=>"pl@pl.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]"}, "commit"=>"Update"}
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 5  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = $1 LIMIT 1  [["id", 5]]
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  UPDATE "users" SET "first_name" = $1, "last_name" = $2, "updated_at" = $3 WHERE "users"."id" = 5  [["first_name", "Aleksandar"], ["last_name", "Popovic"], ["updated_at", "2014-11-03 13:32:42.266518"]]
+  [1m[36m (28.6ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 197ms (ActiveRecord: 32.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-03 14:32:42 +0100
+Processing by DashboardController#index as HTML
+  [1m[35mUser Load (0.7ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 5  ORDER BY "users"."id" ASC LIMIT 1
+  Rendered dashboard/index.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 380ms (Views: 376.1ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/assets/application-layout.css?body=1" for 127.0.0.1 at 2014-11-03 14:32:42 +0100
+
+
+Started GET "/assets/bootstrap.min.css?body=1" for 127.0.0.1 at 2014-11-03 14:32:42 +0100
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-11-03 14:32:42 +0100
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2014-11-03 14:32:42 +0100
+
+
+Started GET "/assets/dashboard.css?body=1" for 127.0.0.1 at 2014-11-03 14:32:42 +0100
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-11-03 14:32:42 +0100
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-11-03 14:32:42 +0100
+
+
+Started GET "/assets/twitter/bootstrap/transition.js?body=1" for 127.0.0.1 at 2014-11-03 14:32:42 +0100
+
+
+Started GET "/assets/twitter/bootstrap/modal.js?body=1" for 127.0.0.1 at 2014-11-03 14:32:42 +0100
+
+
+Started GET "/assets/twitter/bootstrap/alert.js?body=1" for 127.0.0.1 at 2014-11-03 14:32:42 +0100
+
+
+Started GET "/assets/twitter/bootstrap/dropdown.js?body=1" for 127.0.0.1 at 2014-11-03 14:32:42 +0100
+
+
+Started GET "/assets/twitter/bootstrap/scrollspy.js?body=1" for 127.0.0.1 at 2014-11-03 14:32:42 +0100
+
+
+Started GET "/assets/twitter/bootstrap/tab.js?body=1" for 127.0.0.1 at 2014-11-03 14:32:42 +0100
+
+
+Started GET "/assets/twitter/bootstrap/popover.js?body=1" for 127.0.0.1 at 2014-11-03 14:32:42 +0100
+
+
+Started GET "/assets/twitter/bootstrap/button.js?body=1" for 127.0.0.1 at 2014-11-03 14:32:42 +0100
+
+
+Started GET "/assets/twitter/bootstrap/collapse.js?body=1" for 127.0.0.1 at 2014-11-03 14:32:42 +0100
+
+
+Started GET "/assets/twitter/bootstrap/tooltip.js?body=1" for 127.0.0.1 at 2014-11-03 14:32:42 +0100
+
+
+Started GET "/assets/twitter/bootstrap/carousel.js?body=1" for 127.0.0.1 at 2014-11-03 14:32:42 +0100
+
+
+Started GET "/assets/twitter/bootstrap/affix.js?body=1" for 127.0.0.1 at 2014-11-03 14:32:42 +0100
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2014-11-03 14:32:42 +0100
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-11-03 14:32:42 +0100
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2014-11-03 14:32:42 +0100
+
+
+Started GET "/assets/dashboard.js?body=1" for 127.0.0.1 at 2014-11-03 14:32:42 +0100
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-11-03 14:32:42 +0100
+
+
+Started GET "/assets/bootstrap.min.css" for 127.0.0.1 at 2014-11-03 14:32:42 +0100
+
+
+Started GET "/assets/vector-viking-shaded.png" for 127.0.0.1 at 2014-11-03 14:32:43 +0100
+
+
+Started GET "/users/edit" for 127.0.0.1 at 2014-11-03 14:32:49 +0100
+Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 5  ORDER BY "users"."id" ASC LIMIT 1[0m
+  Rendered users/registrations/edit.html.erb within layouts/application (10.9ms)
+Completed 200 OK in 398ms (Views: 393.8ms | ActiveRecord: 0.7ms)
