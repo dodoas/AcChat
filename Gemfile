@@ -42,3 +42,4 @@ end
 gem 'devise'
 gem "less-rails"
 gem "twitter-bootstrap-rails"
+gem 'exception_handler'

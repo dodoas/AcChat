@@ -37276,3 +37276,10 @@ ActionController::RoutingError (No route matches [GET] "/popac"):
   Rendered /home/popac/.rbenv/versions/2.1.4/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/routes/_route.html.erb (5.5ms)
   Rendered /home/popac/.rbenv/versions/2.1.4/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.9ms)
   Rendered /home/popac/.rbenv/versions/2.1.4/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (54.3ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateErrors (20141104093732)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (402.3ms)[0m  [1mCREATE TABLE "errors" ("id" serial primary key, "usable_type" character varying(255), "usable_id" integer, "class_name" text, "message" text, "trace" text, "target_url" text, "referer_url" text, "params" text, "user_agent" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141104093732"]]
+  [1m[36m (25.3ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.3ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
