@@ -1,6 +1,6 @@
 class EmailsController < ApplicationController
   before_action :set_email, only: [:show, :edit, :update, :destroy]
-
+ layout 'email'
   # GET /emails
   # GET /emails.json
   def index
