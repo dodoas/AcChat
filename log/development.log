@@ -51462,3 +51462,14 @@ Processing by Devise::PasswordsController#new as HTML
   Rendered users/shared/_links.html.erb (3.6ms)
   Rendered users/passwords/new.html.erb within layouts/devise (9.4ms)
 Completed 200 OK in 572ms (Views: 570.4ms | ActiveRecord: 0.0ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to RolifyCreateRoles (20141106092111)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (91.2ms)[0m  [1mCREATE TABLE "roles" ("id" serial primary key, "name" character varying(255), "resource_id" integer, "resource_type" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (0.8ms)[0m  CREATE TABLE "users_roles" ("user_id" integer, "role_id" integer) 
+  [1m[36m (72.0ms)[0m  [1mCREATE  INDEX  "index_roles_on_name" ON "roles"  ("name")[0m
+  [1m[35m (40.2ms)[0m  CREATE  INDEX  "index_roles_on_name_and_resource_type_and_resource_id" ON "roles"  ("name", "resource_type", "resource_id")
+  [1m[36m (40.3ms)[0m  [1mCREATE  INDEX  "index_users_roles_on_user_id_and_role_id" ON "users_roles"  ("user_id", "role_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141106092111"]]
+  [1m[36m (18.6ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.3ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"

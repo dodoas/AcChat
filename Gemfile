@@ -43,6 +43,8 @@ gem 'rails_12factor', group: :production
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 gem 'devise'
+gem 'cancan'
+gem 'rolify'
 gem "less-rails"
 gem "twitter-bootstrap-rails"
 gem 'exception_handler'
