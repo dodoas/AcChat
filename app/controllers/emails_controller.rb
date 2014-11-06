@@ -4,7 +4,8 @@ class EmailsController < ApplicationController
   # GET /emails
   # GET /emails.json
   def index
-    @emails = Email.all
+    @emails_Received = Email.received_messages(current_user.id).all
+    @emails_Send = Email.send_messages(current_user.id).all
   end
 
   # GET /emails/1
@@ -25,7 +26,7 @@ class EmailsController < ApplicationController
   # POST /emails.json
   def create
     @email = Email.new(email_params)
-
+    @email.sender_id = current_user.id
     respond_to do |format|
       if @email.save
         format.html { redirect_to @email, notice: 'Email was successfully created.' }

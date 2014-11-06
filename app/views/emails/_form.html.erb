@@ -1,29 +1,45 @@
-<%= form_for(@email) do |f| %>
-  <% if @email.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@email.errors.count, "error") %> prohibited this email from being saved:</h2>
+<%= form_for @email, :html => { :class => "form-horizontal email" } do |f| %>
 
-      <ul>
-      <% @email.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <% if @email.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@email.errors.count, "error") %> prohibited this email from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @email.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :recipient_id %><br>
-    <%= f.text_field :recipient_id %>
+  <div class="control-group">
+    <%= f.label :recipient_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :recipient_id, User.all.map { |v| [ v.email, v.id ] } ,:class => 'form-control' %>
+    </div>
+    <%= error_span(@email[:recipient_id]) %>
   </div>
-  <div class="field">
-    <%= f.label :message_subject %><br>
-    <%= f.text_field :message_subject %>
+  <div class="control-group">
+    <%= f.label :message_subject, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :message_subject, :class => 'form-control' %>
+    </div>
+    <%= error_span(@email[:message_subject]) %>
   </div>
-  <div class="field">
-    <%= f.label :message_body %><br>
-    <%= f.text_area :message_body %>
+  <div class="control-group">
+    <%= f.label :message_body, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :message_body, :class => 'form-control' %>
+    </div>
+    <%= error_span(@email[:message_body]) %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            emails_path, :class => 'btn btn-default' %>
+
 <% end %>
