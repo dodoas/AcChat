@@ -51337,3 +51337,128 @@ Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-11-06 09:59:29
 
 
 Started GET "/assets/vector-viking-shaded.png" for 127.0.0.1 at 2014-11-06 09:59:29 +0100
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2014-11-06 10:07:13 +0100
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"DEjOXI77Hp3b5RvTuemto8RxZ0S8Y8ehkmVgZwlg0sA="}
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 31ms (ActiveRecord: 3.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-06 10:07:13 +0100
+Processing by DashboardController#index as HTML
+Completed 401 Unauthorized in 2ms
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2014-11-06 10:07:13 +0100
+Processing by Devise::SessionsController#new as HTML
+  Rendered users/shared/_links.html.erb (1.0ms)
+  Rendered users/sessions/new.html.erb within layouts/login (5.7ms)
+Completed 200 OK in 571ms (Views: 569.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application-layout.css?body=1" for 127.0.0.1 at 2014-11-06 10:07:14 +0100
+
+
+Started GET "/assets/bootstrap.min.css?body=1" for 127.0.0.1 at 2014-11-06 10:07:14 +0100
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2014-11-06 10:07:14 +0100
+
+
+Started GET "/assets/dashboard.css?body=1" for 127.0.0.1 at 2014-11-06 10:07:14 +0100
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2014-11-06 10:07:14 +0100
+
+
+Started GET "/assets/emails.css?body=1" for 127.0.0.1 at 2014-11-06 10:07:14 +0100
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-11-06 10:07:14 +0100
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-11-06 10:07:14 +0100
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-11-06 10:07:14 +0100
+
+
+Started GET "/assets/twitter/bootstrap/transition.js?body=1" for 127.0.0.1 at 2014-11-06 10:07:14 +0100
+
+
+Started GET "/assets/twitter/bootstrap/alert.js?body=1" for 127.0.0.1 at 2014-11-06 10:07:14 +0100
+
+
+Started GET "/assets/twitter/bootstrap/dropdown.js?body=1" for 127.0.0.1 at 2014-11-06 10:07:14 +0100
+
+
+Started GET "/assets/twitter/bootstrap/tab.js?body=1" for 127.0.0.1 at 2014-11-06 10:07:14 +0100
+
+
+Started GET "/assets/twitter/bootstrap/modal.js?body=1" for 127.0.0.1 at 2014-11-06 10:07:14 +0100
+
+
+Started GET "/assets/twitter/bootstrap/tooltip.js?body=1" for 127.0.0.1 at 2014-11-06 10:07:14 +0100
+
+
+Started GET "/assets/twitter/bootstrap/scrollspy.js?body=1" for 127.0.0.1 at 2014-11-06 10:07:14 +0100
+
+
+Started GET "/assets/twitter/bootstrap/popover.js?body=1" for 127.0.0.1 at 2014-11-06 10:07:14 +0100
+
+
+Started GET "/assets/twitter/bootstrap/button.js?body=1" for 127.0.0.1 at 2014-11-06 10:07:14 +0100
+
+
+Started GET "/assets/bootstrap.min.css" for 127.0.0.1 at 2014-11-06 10:07:14 +0100
+
+
+Started GET "/assets/twitter/bootstrap/collapse.js?body=1" for 127.0.0.1 at 2014-11-06 10:07:14 +0100
+
+
+Started GET "/assets/twitter/bootstrap/carousel.js?body=1" for 127.0.0.1 at 2014-11-06 10:07:14 +0100
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-11-06 10:07:14 +0100
+
+
+Started GET "/assets/twitter/bootstrap/affix.js?body=1" for 127.0.0.1 at 2014-11-06 10:07:14 +0100
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2014-11-06 10:07:14 +0100
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2014-11-06 10:07:14 +0100
+
+
+Started GET "/assets/dashboard.js?body=1" for 127.0.0.1 at 2014-11-06 10:07:14 +0100
+
+
+Started GET "/assets/emails.js?body=1" for 127.0.0.1 at 2014-11-06 10:07:14 +0100
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-11-06 10:07:14 +0100
+
+
+Started GET "/assets/ipad-hand.png" for 127.0.0.1 at 2014-11-06 10:07:14 +0100
+
+
+Started GET "/assets/ser01.png" for 127.0.0.1 at 2014-11-06 10:07:14 +0100
+
+
+Started GET "/assets/ser02.png" for 127.0.0.1 at 2014-11-06 10:07:14 +0100
+
+
+Started GET "/assets/ser03.png" for 127.0.0.1 at 2014-11-06 10:07:14 +0100
+
+
+Started GET "/users/password/new" for 127.0.0.1 at 2014-11-06 10:07:23 +0100
+Processing by Devise::PasswordsController#new as HTML
+  Rendered users/shared/_links.html.erb (3.6ms)
+  Rendered users/passwords/new.html.erb within layouts/devise (9.4ms)
+Completed 200 OK in 572ms (Views: 570.4ms | ActiveRecord: 0.0ms)
