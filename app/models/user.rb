@@ -5,5 +5,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable#,
          #:confirmable, :lockable, :timeoutable
-  has_many :messages
+  has_many :emails
+  scope :user, -> (u) { where( :id => u ) }
 end

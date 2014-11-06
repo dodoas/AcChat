@@ -1,6 +1,6 @@
 class EmailsController < ApplicationController
   before_action :set_email, only: [:show, :edit, :update, :destroy]
- layout 'email'
+  layout 'email'
   # GET /emails
   # GET /emails.json
   def index
@@ -29,6 +29,10 @@ class EmailsController < ApplicationController
     @email.sender_id = current_user.id
     respond_to do |format|
       if @email.save
+        #p = params[:recipient_id]
+        #@user = User.email_to_send(p).all
+        #user = @user
+        #UserNotifier.notify(user).deliver
         format.html { redirect_to @email, notice: 'Email was successfully created.' }
         format.json { render :show, status: :created, location: @email }
       else
