@@ -1,29 +1,22 @@
 class EmailsController < ApplicationController
   before_action :set_email, only: [:show, :edit, :update, :destroy]
   layout 'email'
-  # GET /emails
-  # GET /emails.json
+
   def index
     @emails_Received = Email.received_messages(current_user.id).all
     @emails_Send = Email.send_messages(current_user.id).all
   end
 
-  # GET /emails/1
-  # GET /emails/1.json
   def show
   end
 
-  # GET /emails/new
   def new
     @email = Email.new
   end
 
-  # GET /emails/1/edit
   def edit
   end
 
-  # POST /emails
-  # POST /emails.json
   def create
     @email = Email.new(email_params)
     @email.sender_id = current_user.id
@@ -42,8 +35,6 @@ class EmailsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /emails/1
-  # PATCH/PUT /emails/1.json
   def update
     respond_to do |format|
       if @email.update(email_params)
@@ -56,8 +47,6 @@ class EmailsController < ApplicationController
     end
   end
 
-  # DELETE /emails/1
-  # DELETE /emails/1.json
   def destroy
     @email.destroy
     respond_to do |format|
@@ -67,12 +56,11 @@ class EmailsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_email
       @email = Email.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def email_params
       params.require(:email).permit(:recipient_id, :message_subject, :message_body)
     end
