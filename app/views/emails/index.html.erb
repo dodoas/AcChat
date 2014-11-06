@@ -1,10 +1,4 @@
-<% @last = Email.last %>
-<%= @last.recipient_id %>
-<% user_in_last_post = @last.recipient_id %>
-<% @user = User.user(user_in_last_post).last  %>
-<%= @user.email %>
 <%- model_class = Email -%>
-<!-- Tab panes -->
 <div class="tab-content">
   <div role="tabpanel" class="tab-pane active" id="home">
     <div class="table-responsive">

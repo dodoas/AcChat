@@ -22,10 +22,12 @@ class EmailsController < ApplicationController
     @email.sender_id = current_user.id
     respond_to do |format|
       if @email.save
-        #p = params[:recipient_id]
-        #@user = User.email_to_send(p).all
-        #user = @user
-        #UserNotifier.notify(user).deliver
+        if current_user.has_role? :admin
+        @last = Email.last
+        user_in_last_post = @last.recipient_id
+        user = User.user(user_in_last_post).last
+        UserNotifier.notify(user).deliver
+        end
         format.html { redirect_to @email, notice: 'Email was successfully created.' }
         format.json { render :show, status: :created, location: @email }
       else
