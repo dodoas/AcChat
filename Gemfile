@@ -48,3 +48,4 @@ gem 'rolify'
 gem "less-rails"
 gem "twitter-bootstrap-rails"
 gem 'exception_handler'
+gem 'will_paginate', '~> 3.0'
