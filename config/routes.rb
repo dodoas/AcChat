@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :contacts
+
   mount Ckeditor::Engine => '/ckeditor'
   resources :group_emails
   resources :emails
