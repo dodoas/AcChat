@@ -33,4 +33,3 @@ gem "nested_form"
 gem 'ckeditor'
 gem 'paperclip'
 gem "unicorn-rails"
-gem 'thin'
