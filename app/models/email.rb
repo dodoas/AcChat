@@ -4,4 +4,5 @@ class Email < ActiveRecord::Base
   scope :received_messages, -> (r) { where( :recipient_id => r ) }
   scope :send_messages, -> (s) { where( :sender_id => s ) }
   resourcify
+  validates_presence_of :recipient_id, :message_subject, :message_body
 end
