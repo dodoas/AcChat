@@ -51,3 +51,4 @@ gem 'exception_handler'
 gem 'jquery-turbolinks'
 gem "nested_form"
 gem 'ckeditor'
+gem 'paperclip'
