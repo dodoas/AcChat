@@ -33,17 +33,26 @@
         </div>
       </div>
       <div class="col-md-4">
-        <%= f.fields_for :recipients do |r| %>
-        <% end %>
+        <div class="well">
+          <%= f.fields_for :recipients do |r| %>
+              <ul class="list-group">
+                <li class="list-group-item">
+                  <span class="badge"><%= r.link_to_remove "Remove recipient" %></span>
+                  <%= r.select :id, User.all.map { |v| [v.first_name, v.id] } %>
+                </li>
+              </ul>
+          <% end %>
+          <p><%= f.link_to_add "Add a recipient", :recipients %></p>
+        </div>
       </div>
       </div>
       <div class="row">
         <div class="col-md-12">
           <div class="form-group">
-          <%= f.submit nil, :class => 'btn btn-primary' %>
-          <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                      group_emails_path, :class => 'btn btn-default' %>
-            </div>
+            <%= f.submit nil, :class => 'btn btn-primary' %>
+            <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                        group_emails_path, :class => 'btn btn-default' %>
+          </div>
         </div>
       </div>
   <% end %>
