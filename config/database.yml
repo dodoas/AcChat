@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: AcChat_production
-  username: AcChat
-  password: <%= ENV['ACCHAT_DATABASE_PASSWORD'] %>
+  username: popac
+  password: popac
