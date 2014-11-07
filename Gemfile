@@ -33,3 +33,4 @@ gem "nested_form"
 gem 'ckeditor'
 gem 'paperclip'
 gem "unicorn-rails"
+gem 'sprockets-rails', :require => 'sprockets/railtie'

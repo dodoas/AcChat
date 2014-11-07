@@ -1,0 +1,548 @@
+  [1m[36mSQL (100.8ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (432.1ms)[0m  CREATE TABLE "ckeditor_assets" ("id" serial primary key, "data_file_name" character varying(255) NOT NULL, "data_content_type" character varying(255), "data_file_size" integer, "assetable_id" integer, "assetable_type" character varying(30), "type" character varying(30), "width" integer, "height" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (58.1ms)[0m  [1mCREATE  INDEX  "idx_ckeditor_assetable" ON "ckeditor_assets" USING btree ("assetable_type", "assetable_id")[0m
+  [1m[35m (56.3ms)[0m  CREATE  INDEX  "idx_ckeditor_assetable_type" ON "ckeditor_assets" USING btree ("assetable_type", "type", "assetable_id")
+  [1m[36m (98.0ms)[0m  [1mCREATE TABLE "contacts" ("id" serial primary key, "first_name" character varying(255), "last_name" character varying(255), "email_addres" character varying(255), "phone" character varying(255), "address" character varying(255), "web_site" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (107.0ms)[0m  CREATE TABLE "emails" ("id" serial primary key, "recipient_id" integer, "message_subject" character varying(255), "message_body" text, "created_at" timestamp, "updated_at" timestamp, "sender_id" integer) 
+  [1m[36m (58.0ms)[0m  [1mCREATE  INDEX  "index_emails_on_recipient_id" ON "emails" USING btree ("recipient_id")[0m
+  [1m[35m (64.5ms)[0m  CREATE  INDEX  "index_emails_on_sender_id" ON "emails" USING btree ("sender_id")
+  [1m[36m (89.8ms)[0m  [1mCREATE TABLE "errors" ("id" serial primary key, "usable_type" character varying(255), "usable_id" integer, "class_name" text, "message" text, "trace" text, "target_url" text, "referer_url" text, "params" text, "user_agent" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (56.7ms)[0m  CREATE TABLE "group_email_recipients" ("id" serial primary key, "recipient_id" integer, "created_at" timestamp, "updated_at" timestamp, "group_email_id" integer) 
+  [1m[36m (97.7ms)[0m  [1mCREATE  INDEX  "index_group_email_recipients_on_recipient_id" ON "group_email_recipients" USING btree ("recipient_id")[0m
+  [1m[35m (90.3ms)[0m  CREATE TABLE "group_emails" ("id" serial primary key, "message_subject" character varying(255), "message_body" text, "created_at" timestamp, "updated_at" timestamp, "sender_id" integer) 
+  [1m[36m (66.7ms)[0m  [1mCREATE  INDEX  "index_group_emails_on_sender_id" ON "group_emails" USING btree ("sender_id")[0m
+  [1m[35m (89.9ms)[0m  CREATE TABLE "roles" ("id" serial primary key, "name" character varying(255), "resource_id" integer, "resource_type" character varying(255), "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (58.3ms)[0m  [1mCREATE  INDEX  "index_roles_on_name_and_resource_type_and_resource_id" ON "roles" USING btree ("name", "resource_type", "resource_id")[0m
+  [1m[35m (56.2ms)[0m  CREATE  INDEX  "index_roles_on_name" ON "roles" USING btree ("name")
+  [1m[36m (85.1ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "email" character varying(255) DEFAULT '' NOT NULL, "encrypted_password" character varying(255) DEFAULT '' NOT NULL, "reset_password_token" character varying(255), "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" inet, "last_sign_in_ip" inet, "created_at" timestamp, "updated_at" timestamp, "first_name" character varying(255), "last_name" character varying(255), "group_email_id" integer, "recipient_id" integer) [0m
+  [1m[35m (55.8ms)[0m  CREATE UNIQUE INDEX  "index_users_on_email" ON "users" USING btree ("email")
+  [1m[36m (64.8ms)[0m  [1mCREATE  INDEX  "index_users_on_group_email_id" ON "users" USING btree ("group_email_id")[0m
+  [1m[35m (64.6ms)[0m  CREATE  INDEX  "index_users_on_recipient_id" ON "users" USING btree ("recipient_id")
+  [1m[36m (48.0ms)[0m  [1mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users" USING btree ("reset_password_token")[0m
+  [1m[35m (6.9ms)[0m  CREATE TABLE "users_roles" ("user_id" integer, "role_id" integer) 
+  [1m[36m (56.5ms)[0m  [1mCREATE  INDEX  "index_users_roles_on_user_id_and_role_id" ON "users_roles" USING btree ("user_id", "role_id")[0m
+  [1m[35m (6.9ms)[0m  CREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) 
+  [1m[36m (56.3ms)[0m  [1mCREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")[0m
+  [1m[35m (0.6ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (6.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141107130842')[0m
+  [1m[35m (8.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141103142540')
+  [1m[36m (8.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141107094209')[0m
+  [1m[35m (8.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141104093732')
+  [1m[36m (8.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141103122351')[0m
+  [1m[35m (8.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141107124222')
+  [1m[36m (8.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141107123514')[0m
+  [1m[35m (8.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141107120225')
+  [1m[36m (8.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141103141045')[0m
+  [1m[35m (8.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141107123854')
+  [1m[36m (8.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141106092111')[0m
+  [1m[35m (8.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141107071554')
+  [1m[36m (8.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141102213539')[0m
+  [1m[35m (8.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141103122428')
+  [1m[36m (8.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141107071857')[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.3ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (16.3ms)[0m  [1mALTER TABLE "ckeditor_assets" DISABLE TRIGGER ALL;ALTER TABLE "contacts" DISABLE TRIGGER ALL;ALTER TABLE "emails" DISABLE TRIGGER ALL;ALTER TABLE "errors" DISABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" DISABLE TRIGGER ALL;ALTER TABLE "group_emails" DISABLE TRIGGER ALL;ALTER TABLE "roles" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "users_roles" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mFixture Delete (0.7ms)[0m  [1mDELETE FROM "group_email_recipients"[0m
+  [1m[35mFixture Insert (0.5ms)[0m  INSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)[0m
+  [1m[35mFixture Delete (0.5ms)[0m  DELETE FROM "contacts"
+  [1m[36mFixture Insert (0.4ms)[0m  [1mINSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[36mFixture Delete (1.2ms)[0m  [1mDELETE FROM "roles"[0m
+  [1m[35mFixture Insert (0.5ms)[0m  INSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)[0m
+  [1m[35mFixture Delete (0.6ms)[0m  DELETE FROM "emails"
+  [1m[36mFixture Insert (0.5ms)[0m  [1mINSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[36mFixture Delete (1.2ms)[0m  [1mDELETE FROM "users"[0m
+  [1m[35mFixture Insert (0.9ms)[0m  INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)
+  [1m[36mFixture Insert (1.1ms)[0m  [1mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)[0m
+PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_email"
+DETAIL:  Key (email)=() already exists.
+: INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "ckeditor_assets" ENABLE TRIGGER ALL;ALTER TABLE "contacts" ENABLE TRIGGER ALL;ALTER TABLE "emails" ENABLE TRIGGER ALL;ALTER TABLE "errors" ENABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" ENABLE TRIGGER ALL;ALTER TABLE "group_emails" ENABLE TRIGGER ALL;ALTER TABLE "roles" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "users_roles" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "ckeditor_assets" DISABLE TRIGGER ALL;ALTER TABLE "contacts" DISABLE TRIGGER ALL;ALTER TABLE "emails" DISABLE TRIGGER ALL;ALTER TABLE "errors" DISABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" DISABLE TRIGGER ALL;ALTER TABLE "group_emails" DISABLE TRIGGER ALL;ALTER TABLE "roles" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "users_roles" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.6ms)[0m  DELETE FROM "group_email_recipients"
+  [1m[36mFixture Insert (0.5ms)[0m  [1mINSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[36mFixture Delete (0.4ms)[0m  [1mDELETE FROM "contacts"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)[0m
+  [1m[35mFixture Delete (0.4ms)[0m  DELETE FROM "roles"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[36mFixture Delete (0.4ms)[0m  [1mDELETE FROM "emails"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)[0m
+  [1m[35mFixture Delete (0.5ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)[0m
+  [1m[35mFixture Insert (0.7ms)[0m  INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_email"
+DETAIL:  Key (email)=() already exists.
+: INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "ckeditor_assets" ENABLE TRIGGER ALL;ALTER TABLE "contacts" ENABLE TRIGGER ALL;ALTER TABLE "emails" ENABLE TRIGGER ALL;ALTER TABLE "errors" ENABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" ENABLE TRIGGER ALL;ALTER TABLE "group_emails" ENABLE TRIGGER ALL;ALTER TABLE "roles" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "users_roles" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "ckeditor_assets" DISABLE TRIGGER ALL;ALTER TABLE "contacts" DISABLE TRIGGER ALL;ALTER TABLE "emails" DISABLE TRIGGER ALL;ALTER TABLE "errors" DISABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" DISABLE TRIGGER ALL;ALTER TABLE "group_emails" DISABLE TRIGGER ALL;ALTER TABLE "roles" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "users_roles" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "group_email_recipients"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "contacts"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "roles"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "emails"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "users"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)
+  [1m[36mFixture Insert (0.5ms)[0m  [1mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)[0m
+PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_email"
+DETAIL:  Key (email)=() already exists.
+: INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "ckeditor_assets" ENABLE TRIGGER ALL;ALTER TABLE "contacts" ENABLE TRIGGER ALL;ALTER TABLE "emails" ENABLE TRIGGER ALL;ALTER TABLE "errors" ENABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" ENABLE TRIGGER ALL;ALTER TABLE "group_emails" ENABLE TRIGGER ALL;ALTER TABLE "roles" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "users_roles" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "ckeditor_assets" DISABLE TRIGGER ALL;ALTER TABLE "contacts" DISABLE TRIGGER ALL;ALTER TABLE "emails" DISABLE TRIGGER ALL;ALTER TABLE "errors" DISABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" DISABLE TRIGGER ALL;ALTER TABLE "group_emails" DISABLE TRIGGER ALL;ALTER TABLE "roles" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "users_roles" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "group_email_recipients"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "contacts"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)
+  [1m[36mFixture Insert (0.4ms)[0m  [1mINSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "roles"
+  [1m[36mFixture Insert (0.4ms)[0m  [1mINSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "emails"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)[0m
+  [1m[35mFixture Insert (0.7ms)[0m  INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_email"
+DETAIL:  Key (email)=() already exists.
+: INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "ckeditor_assets" ENABLE TRIGGER ALL;ALTER TABLE "contacts" ENABLE TRIGGER ALL;ALTER TABLE "emails" ENABLE TRIGGER ALL;ALTER TABLE "errors" ENABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" ENABLE TRIGGER ALL;ALTER TABLE "group_emails" ENABLE TRIGGER ALL;ALTER TABLE "roles" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "users_roles" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "ckeditor_assets" DISABLE TRIGGER ALL;ALTER TABLE "contacts" DISABLE TRIGGER ALL;ALTER TABLE "emails" DISABLE TRIGGER ALL;ALTER TABLE "errors" DISABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" DISABLE TRIGGER ALL;ALTER TABLE "group_emails" DISABLE TRIGGER ALL;ALTER TABLE "roles" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "users_roles" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "group_email_recipients"[0m
+  [1m[35mFixture Insert (3.1ms)[0m  INSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "contacts"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "roles"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "emails"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "users"[0m
+  [1m[35mFixture Insert (0.4ms)[0m  INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)
+  [1m[36mFixture Insert (0.6ms)[0m  [1mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)[0m
+PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_email"
+DETAIL:  Key (email)=() already exists.
+: INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "ckeditor_assets" ENABLE TRIGGER ALL;ALTER TABLE "contacts" ENABLE TRIGGER ALL;ALTER TABLE "emails" ENABLE TRIGGER ALL;ALTER TABLE "errors" ENABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" ENABLE TRIGGER ALL;ALTER TABLE "group_emails" ENABLE TRIGGER ALL;ALTER TABLE "roles" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "users_roles" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "ckeditor_assets" DISABLE TRIGGER ALL;ALTER TABLE "contacts" DISABLE TRIGGER ALL;ALTER TABLE "emails" DISABLE TRIGGER ALL;ALTER TABLE "errors" DISABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" DISABLE TRIGGER ALL;ALTER TABLE "group_emails" DISABLE TRIGGER ALL;ALTER TABLE "roles" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "users_roles" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "group_email_recipients"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)[0m
+  [1m[35mFixture Insert (2.0ms)[0m  INSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "contacts"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "roles"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "emails"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.5ms)[0m  [1mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)[0m
+  [1m[35mFixture Insert (0.7ms)[0m  INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_email"
+DETAIL:  Key (email)=() already exists.
+: INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "ckeditor_assets" ENABLE TRIGGER ALL;ALTER TABLE "contacts" ENABLE TRIGGER ALL;ALTER TABLE "emails" ENABLE TRIGGER ALL;ALTER TABLE "errors" ENABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" ENABLE TRIGGER ALL;ALTER TABLE "group_emails" ENABLE TRIGGER ALL;ALTER TABLE "roles" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "users_roles" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "ckeditor_assets" DISABLE TRIGGER ALL;ALTER TABLE "contacts" DISABLE TRIGGER ALL;ALTER TABLE "emails" DISABLE TRIGGER ALL;ALTER TABLE "errors" DISABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" DISABLE TRIGGER ALL;ALTER TABLE "group_emails" DISABLE TRIGGER ALL;ALTER TABLE "roles" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "users_roles" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "group_email_recipients"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "contacts"
+  [1m[36mFixture Insert (0.4ms)[0m  [1mINSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[36mFixture Delete (0.4ms)[0m  [1mDELETE FROM "roles"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "emails"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "users"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)
+  [1m[36mFixture Insert (0.7ms)[0m  [1mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)[0m
+PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_email"
+DETAIL:  Key (email)=() already exists.
+: INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "ckeditor_assets" ENABLE TRIGGER ALL;ALTER TABLE "contacts" ENABLE TRIGGER ALL;ALTER TABLE "emails" ENABLE TRIGGER ALL;ALTER TABLE "errors" ENABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" ENABLE TRIGGER ALL;ALTER TABLE "group_emails" ENABLE TRIGGER ALL;ALTER TABLE "roles" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "users_roles" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.8ms)[0m  ALTER TABLE "ckeditor_assets" DISABLE TRIGGER ALL;ALTER TABLE "contacts" DISABLE TRIGGER ALL;ALTER TABLE "emails" DISABLE TRIGGER ALL;ALTER TABLE "errors" DISABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" DISABLE TRIGGER ALL;ALTER TABLE "group_emails" DISABLE TRIGGER ALL;ALTER TABLE "roles" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "users_roles" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "group_email_recipients"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "contacts"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)[0m
+  [1m[35mFixture Delete (0.5ms)[0m  DELETE FROM "roles"
+  [1m[36mFixture Insert (0.4ms)[0m  [1mINSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "emails"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)[0m
+  [1m[35mFixture Insert (0.5ms)[0m  INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_email"
+DETAIL:  Key (email)=() already exists.
+: INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "ckeditor_assets" ENABLE TRIGGER ALL;ALTER TABLE "contacts" ENABLE TRIGGER ALL;ALTER TABLE "emails" ENABLE TRIGGER ALL;ALTER TABLE "errors" ENABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" ENABLE TRIGGER ALL;ALTER TABLE "group_emails" ENABLE TRIGGER ALL;ALTER TABLE "roles" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "users_roles" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "ckeditor_assets" DISABLE TRIGGER ALL;ALTER TABLE "contacts" DISABLE TRIGGER ALL;ALTER TABLE "emails" DISABLE TRIGGER ALL;ALTER TABLE "errors" DISABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" DISABLE TRIGGER ALL;ALTER TABLE "group_emails" DISABLE TRIGGER ALL;ALTER TABLE "roles" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "users_roles" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mFixture Delete (1.6ms)[0m  [1mDELETE FROM "group_email_recipients"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "contacts"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "roles"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "emails"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "users"[0m
+  [1m[35mFixture Insert (0.4ms)[0m  INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)
+  [1m[36mFixture Insert (0.9ms)[0m  [1mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)[0m
+PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_email"
+DETAIL:  Key (email)=() already exists.
+: INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "ckeditor_assets" ENABLE TRIGGER ALL;ALTER TABLE "contacts" ENABLE TRIGGER ALL;ALTER TABLE "emails" ENABLE TRIGGER ALL;ALTER TABLE "errors" ENABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" ENABLE TRIGGER ALL;ALTER TABLE "group_emails" ENABLE TRIGGER ALL;ALTER TABLE "roles" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "users_roles" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "ckeditor_assets" DISABLE TRIGGER ALL;ALTER TABLE "contacts" DISABLE TRIGGER ALL;ALTER TABLE "emails" DISABLE TRIGGER ALL;ALTER TABLE "errors" DISABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" DISABLE TRIGGER ALL;ALTER TABLE "group_emails" DISABLE TRIGGER ALL;ALTER TABLE "roles" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "users_roles" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "group_email_recipients"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "contacts"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "roles"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "emails"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)[0m
+  [1m[35mFixture Delete (0.4ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)[0m
+  [1m[35mFixture Insert (0.6ms)[0m  INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_email"
+DETAIL:  Key (email)=() already exists.
+: INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "ckeditor_assets" ENABLE TRIGGER ALL;ALTER TABLE "contacts" ENABLE TRIGGER ALL;ALTER TABLE "emails" ENABLE TRIGGER ALL;ALTER TABLE "errors" ENABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" ENABLE TRIGGER ALL;ALTER TABLE "group_emails" ENABLE TRIGGER ALL;ALTER TABLE "roles" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "users_roles" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "ckeditor_assets" DISABLE TRIGGER ALL;ALTER TABLE "contacts" DISABLE TRIGGER ALL;ALTER TABLE "emails" DISABLE TRIGGER ALL;ALTER TABLE "errors" DISABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" DISABLE TRIGGER ALL;ALTER TABLE "group_emails" DISABLE TRIGGER ALL;ALTER TABLE "roles" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "users_roles" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "group_email_recipients"[0m
+  [1m[35mFixture Insert (0.4ms)[0m  INSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "contacts"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "roles"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "emails"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[36mFixture Delete (0.4ms)[0m  [1mDELETE FROM "users"[0m
+  [1m[35mFixture Insert (0.4ms)[0m  INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)
+  [1m[36mFixture Insert (1.0ms)[0m  [1mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)[0m
+PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_email"
+DETAIL:  Key (email)=() already exists.
+: INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "ckeditor_assets" ENABLE TRIGGER ALL;ALTER TABLE "contacts" ENABLE TRIGGER ALL;ALTER TABLE "emails" ENABLE TRIGGER ALL;ALTER TABLE "errors" ENABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" ENABLE TRIGGER ALL;ALTER TABLE "group_emails" ENABLE TRIGGER ALL;ALTER TABLE "roles" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "users_roles" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "ckeditor_assets" DISABLE TRIGGER ALL;ALTER TABLE "contacts" DISABLE TRIGGER ALL;ALTER TABLE "emails" DISABLE TRIGGER ALL;ALTER TABLE "errors" DISABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" DISABLE TRIGGER ALL;ALTER TABLE "group_emails" DISABLE TRIGGER ALL;ALTER TABLE "roles" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "users_roles" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "group_email_recipients"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "contacts"[0m
+  [1m[35mFixture Insert (0.4ms)[0m  INSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "roles"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "emails"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)[0m
+  [1m[35mFixture Insert (0.7ms)[0m  INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_email"
+DETAIL:  Key (email)=() already exists.
+: INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "ckeditor_assets" ENABLE TRIGGER ALL;ALTER TABLE "contacts" ENABLE TRIGGER ALL;ALTER TABLE "emails" ENABLE TRIGGER ALL;ALTER TABLE "errors" ENABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" ENABLE TRIGGER ALL;ALTER TABLE "group_emails" ENABLE TRIGGER ALL;ALTER TABLE "roles" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "users_roles" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "ckeditor_assets" DISABLE TRIGGER ALL;ALTER TABLE "contacts" DISABLE TRIGGER ALL;ALTER TABLE "emails" DISABLE TRIGGER ALL;ALTER TABLE "errors" DISABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" DISABLE TRIGGER ALL;ALTER TABLE "group_emails" DISABLE TRIGGER ALL;ALTER TABLE "roles" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "users_roles" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "group_email_recipients"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)
+  [1m[36mFixture Insert (0.4ms)[0m  [1mINSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "contacts"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "roles"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "emails"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "users"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)
+  [1m[36mFixture Insert (0.5ms)[0m  [1mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)[0m
+PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_email"
+DETAIL:  Key (email)=() already exists.
+: INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "ckeditor_assets" ENABLE TRIGGER ALL;ALTER TABLE "contacts" ENABLE TRIGGER ALL;ALTER TABLE "emails" ENABLE TRIGGER ALL;ALTER TABLE "errors" ENABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" ENABLE TRIGGER ALL;ALTER TABLE "group_emails" ENABLE TRIGGER ALL;ALTER TABLE "roles" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "users_roles" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "ckeditor_assets" DISABLE TRIGGER ALL;ALTER TABLE "contacts" DISABLE TRIGGER ALL;ALTER TABLE "emails" DISABLE TRIGGER ALL;ALTER TABLE "errors" DISABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" DISABLE TRIGGER ALL;ALTER TABLE "group_emails" DISABLE TRIGGER ALL;ALTER TABLE "roles" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "users_roles" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "group_email_recipients"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "contacts"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "roles"
+  [1m[36mFixture Insert (0.4ms)[0m  [1mINSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "emails"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)[0m
+  [1m[35mFixture Delete (0.4ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)[0m
+  [1m[35mFixture Insert (0.6ms)[0m  INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_email"
+DETAIL:  Key (email)=() already exists.
+: INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "ckeditor_assets" ENABLE TRIGGER ALL;ALTER TABLE "contacts" ENABLE TRIGGER ALL;ALTER TABLE "emails" ENABLE TRIGGER ALL;ALTER TABLE "errors" ENABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" ENABLE TRIGGER ALL;ALTER TABLE "group_emails" ENABLE TRIGGER ALL;ALTER TABLE "roles" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "users_roles" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "ckeditor_assets" DISABLE TRIGGER ALL;ALTER TABLE "contacts" DISABLE TRIGGER ALL;ALTER TABLE "emails" DISABLE TRIGGER ALL;ALTER TABLE "errors" DISABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" DISABLE TRIGGER ALL;ALTER TABLE "group_emails" DISABLE TRIGGER ALL;ALTER TABLE "roles" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "users_roles" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "group_email_recipients"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "contacts"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "roles"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)
+  [1m[36mFixture Insert (0.4ms)[0m  [1mINSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "emails"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:41', '2014-11-07 18:30:41', 298486374)
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "users"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)
+  [1m[36mFixture Insert (0.5ms)[0m  [1mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)[0m
+PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_email"
+DETAIL:  Key (email)=() already exists.
+: INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "ckeditor_assets" ENABLE TRIGGER ALL;ALTER TABLE "contacts" ENABLE TRIGGER ALL;ALTER TABLE "emails" ENABLE TRIGGER ALL;ALTER TABLE "errors" ENABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" ENABLE TRIGGER ALL;ALTER TABLE "group_emails" ENABLE TRIGGER ALL;ALTER TABLE "roles" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "users_roles" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.7ms)[0m  ALTER TABLE "ckeditor_assets" DISABLE TRIGGER ALL;ALTER TABLE "contacts" DISABLE TRIGGER ALL;ALTER TABLE "emails" DISABLE TRIGGER ALL;ALTER TABLE "errors" DISABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" DISABLE TRIGGER ALL;ALTER TABLE "group_emails" DISABLE TRIGGER ALL;ALTER TABLE "roles" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "users_roles" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "group_email_recipients"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "contacts"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "roles"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "emails"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)[0m
+  [1m[35mFixture Insert (0.5ms)[0m  INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)
+PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_email"
+DETAIL:  Key (email)=() already exists.
+: INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "ckeditor_assets" ENABLE TRIGGER ALL;ALTER TABLE "contacts" ENABLE TRIGGER ALL;ALTER TABLE "emails" ENABLE TRIGGER ALL;ALTER TABLE "errors" ENABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" ENABLE TRIGGER ALL;ALTER TABLE "group_emails" ENABLE TRIGGER ALL;ALTER TABLE "roles" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "users_roles" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "ckeditor_assets" DISABLE TRIGGER ALL;ALTER TABLE "contacts" DISABLE TRIGGER ALL;ALTER TABLE "emails" DISABLE TRIGGER ALL;ALTER TABLE "errors" DISABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" DISABLE TRIGGER ALL;ALTER TABLE "group_emails" DISABLE TRIGGER ALL;ALTER TABLE "roles" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "users_roles" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mFixture Delete (0.4ms)[0m  [1mDELETE FROM "group_email_recipients"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "contacts"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "roles"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "emails"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "users"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)
+  [1m[36mFixture Insert (0.6ms)[0m  [1mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)[0m
+PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_email"
+DETAIL:  Key (email)=() already exists.
+: INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "ckeditor_assets" ENABLE TRIGGER ALL;ALTER TABLE "contacts" ENABLE TRIGGER ALL;ALTER TABLE "emails" ENABLE TRIGGER ALL;ALTER TABLE "errors" ENABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" ENABLE TRIGGER ALL;ALTER TABLE "group_emails" ENABLE TRIGGER ALL;ALTER TABLE "roles" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "users_roles" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "ckeditor_assets" DISABLE TRIGGER ALL;ALTER TABLE "contacts" DISABLE TRIGGER ALL;ALTER TABLE "emails" DISABLE TRIGGER ALL;ALTER TABLE "errors" DISABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" DISABLE TRIGGER ALL;ALTER TABLE "group_emails" DISABLE TRIGGER ALL;ALTER TABLE "roles" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "users_roles" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "group_email_recipients"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)
+  [1m[36mFixture Delete (0.4ms)[0m  [1mDELETE FROM "contacts"[0m
+  [1m[35mFixture Insert (0.4ms)[0m  INSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "roles"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "emails"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)[0m
+  [1m[35mFixture Insert (0.5ms)[0m  INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)
+PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_email"
+DETAIL:  Key (email)=() already exists.
+: INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "ckeditor_assets" ENABLE TRIGGER ALL;ALTER TABLE "contacts" ENABLE TRIGGER ALL;ALTER TABLE "emails" ENABLE TRIGGER ALL;ALTER TABLE "errors" ENABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" ENABLE TRIGGER ALL;ALTER TABLE "group_emails" ENABLE TRIGGER ALL;ALTER TABLE "roles" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "users_roles" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "ckeditor_assets" DISABLE TRIGGER ALL;ALTER TABLE "contacts" DISABLE TRIGGER ALL;ALTER TABLE "emails" DISABLE TRIGGER ALL;ALTER TABLE "errors" DISABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" DISABLE TRIGGER ALL;ALTER TABLE "group_emails" DISABLE TRIGGER ALL;ALTER TABLE "roles" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "users_roles" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "group_email_recipients"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "contacts"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "roles"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "emails"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "users"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)
+  [1m[36mFixture Insert (0.5ms)[0m  [1mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)[0m
+PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_email"
+DETAIL:  Key (email)=() already exists.
+: INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "ckeditor_assets" ENABLE TRIGGER ALL;ALTER TABLE "contacts" ENABLE TRIGGER ALL;ALTER TABLE "emails" ENABLE TRIGGER ALL;ALTER TABLE "errors" ENABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" ENABLE TRIGGER ALL;ALTER TABLE "group_emails" ENABLE TRIGGER ALL;ALTER TABLE "roles" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "users_roles" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "ckeditor_assets" DISABLE TRIGGER ALL;ALTER TABLE "contacts" DISABLE TRIGGER ALL;ALTER TABLE "emails" DISABLE TRIGGER ALL;ALTER TABLE "errors" DISABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" DISABLE TRIGGER ALL;ALTER TABLE "group_emails" DISABLE TRIGGER ALL;ALTER TABLE "roles" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "users_roles" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.5ms)[0m  DELETE FROM "group_email_recipients"
+  [1m[36mFixture Insert (0.4ms)[0m  [1mINSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "contacts"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "roles"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "emails"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)[0m
+  [1m[35mFixture Insert (0.5ms)[0m  INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)
+PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_email"
+DETAIL:  Key (email)=() already exists.
+: INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "ckeditor_assets" ENABLE TRIGGER ALL;ALTER TABLE "contacts" ENABLE TRIGGER ALL;ALTER TABLE "emails" ENABLE TRIGGER ALL;ALTER TABLE "errors" ENABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" ENABLE TRIGGER ALL;ALTER TABLE "group_emails" ENABLE TRIGGER ALL;ALTER TABLE "roles" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "users_roles" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "ckeditor_assets" DISABLE TRIGGER ALL;ALTER TABLE "contacts" DISABLE TRIGGER ALL;ALTER TABLE "emails" DISABLE TRIGGER ALL;ALTER TABLE "errors" DISABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" DISABLE TRIGGER ALL;ALTER TABLE "group_emails" DISABLE TRIGGER ALL;ALTER TABLE "roles" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "users_roles" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mFixture Delete (0.5ms)[0m  [1mDELETE FROM "group_email_recipients"[0m
+  [1m[35mFixture Insert (1.9ms)[0m  INSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)
+  [1m[36mFixture Insert (0.6ms)[0m  [1mINSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "contacts"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "roles"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "emails"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "users"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)
+  [1m[36mFixture Insert (0.7ms)[0m  [1mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)[0m
+PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_email"
+DETAIL:  Key (email)=() already exists.
+: INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "ckeditor_assets" ENABLE TRIGGER ALL;ALTER TABLE "contacts" ENABLE TRIGGER ALL;ALTER TABLE "emails" ENABLE TRIGGER ALL;ALTER TABLE "errors" ENABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" ENABLE TRIGGER ALL;ALTER TABLE "group_emails" ENABLE TRIGGER ALL;ALTER TABLE "roles" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "users_roles" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "ckeditor_assets" DISABLE TRIGGER ALL;ALTER TABLE "contacts" DISABLE TRIGGER ALL;ALTER TABLE "emails" DISABLE TRIGGER ALL;ALTER TABLE "errors" DISABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" DISABLE TRIGGER ALL;ALTER TABLE "group_emails" DISABLE TRIGGER ALL;ALTER TABLE "roles" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "users_roles" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (1.6ms)[0m  DELETE FROM "group_email_recipients"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)
+  [1m[36mFixture Delete (0.4ms)[0m  [1mDELETE FROM "contacts"[0m
+  [1m[35mFixture Insert (0.4ms)[0m  INSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)
+  [1m[36mFixture Insert (0.4ms)[0m  [1mINSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "roles"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "emails"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)[0m
+  [1m[35mFixture Insert (0.5ms)[0m  INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)
+PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_email"
+DETAIL:  Key (email)=() already exists.
+: INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "ckeditor_assets" ENABLE TRIGGER ALL;ALTER TABLE "contacts" ENABLE TRIGGER ALL;ALTER TABLE "emails" ENABLE TRIGGER ALL;ALTER TABLE "errors" ENABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" ENABLE TRIGGER ALL;ALTER TABLE "group_emails" ENABLE TRIGGER ALL;ALTER TABLE "roles" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "users_roles" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "ckeditor_assets" DISABLE TRIGGER ALL;ALTER TABLE "contacts" DISABLE TRIGGER ALL;ALTER TABLE "emails" DISABLE TRIGGER ALL;ALTER TABLE "errors" DISABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" DISABLE TRIGGER ALL;ALTER TABLE "group_emails" DISABLE TRIGGER ALL;ALTER TABLE "roles" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "users_roles" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "group_email_recipients"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "group_email_recipients" ("recipient_id", "created_at", "updated_at", "id") VALUES (NULL, '2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)[0m
+  [1m[35mFixture Delete (0.4ms)[0m  DELETE FROM "contacts"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "contacts" ("first_name", "last_name", "email_addres", "phone", "address", "web_site", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 'MyString', 'MyString', '2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "roles"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "roles" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "emails"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "emails" ("recipient_id", "message_subject", "message_body", "created_at", "updated_at", "id") VALUES (NULL, 'MyString', 'MyText', '2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "users"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 980190962)
+  [1m[36mFixture Insert (0.5ms)[0m  [1mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)[0m
+PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_email"
+DETAIL:  Key (email)=() already exists.
+: INSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2014-11-07 18:30:42', '2014-11-07 18:30:42', 298486374)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "ckeditor_assets" ENABLE TRIGGER ALL;ALTER TABLE "contacts" ENABLE TRIGGER ALL;ALTER TABLE "emails" ENABLE TRIGGER ALL;ALTER TABLE "errors" ENABLE TRIGGER ALL;ALTER TABLE "group_email_recipients" ENABLE TRIGGER ALL;ALTER TABLE "group_emails" ENABLE TRIGGER ALL;ALTER TABLE "roles" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "users_roles" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
