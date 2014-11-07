@@ -1,18 +1,5 @@
-<% if current_user.has_role? :admin %>
-<h1>Editing group_email</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @group_email %> |
-<%= link_to 'Back', group_emails_path %>
-<% else %>
-    <div class="jumbotron">
-      <h1>Hello <%= current_user.first_name %></h1>
-      <div class="alert alert-danger" role="alert">
-        <p>Dear you have no right to access this page !!!<br>
-          Please go back !!!</p>
-      </div>
-      <p><%= link_to "Dashboard", dashboard_index_path, :class => 'btn btn-primary btn-lg' %></p>
-      <p><%= link_to "Emails Dashboard", emails_path, :class => 'btn btn-primary btn-lg' %></p>
-    </div>
-<% end %>
+<%- model_class = GroupEmail -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize %></h1>
+</div>
+<%= render :partial => 'form' %>

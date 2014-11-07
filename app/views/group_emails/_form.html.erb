@@ -1,25 +1,45 @@
-<%= form_for(@group_email) do |f| %>
-  <% if @group_email.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@group_email.errors.count, "error") %> prohibited this group_email from being saved:</h2>
+<%= form_for @group_email, :html => { :class => "form-horizontal group_email" } do |f| %>
 
-      <ul>
-      <% @group_email.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <% if @group_email.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@group_email.errors.count, "error") %> prohibited this group_email from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @group_email.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :message_subject %><br>
-    <%= f.text_field :message_subject %>
+  <div class="control-group">
+    <%= f.label :message_subject, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :message_subject, :class => 'form-control' %>
+    </div>
+    <%= error_span(@group_email[:message_subject]) %>
   </div>
-  <div class="field">
-    <%= f.label :message_body %><br>
-    <%= f.text_area :message_body %>
+  <div class="control-group">
+    <%= f.label :message_body, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :message_body, :class => 'form-control' %>
+    </div>
+    <%= error_span(@group_email[:message_body]) %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="control-group">
+    <%= f.label :sender_id_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :sender_id_id, :class => 'form-control' %>
+    </div>
+    <%= error_span(@group_email[:sender_id_id]) %>
   </div>
+
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            group_emails_path, :class => 'btn btn-default' %>
+
 <% end %>
