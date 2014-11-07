@@ -1,0 +1,2 @@
+module CustomErrorHelper
+end

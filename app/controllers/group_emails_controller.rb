@@ -1,6 +1,5 @@
 class GroupEmailsController < ApplicationController
-  before_action :set_group_email, only: [:show, :edit, :update, :destroy]
-
+    before_action :set_group_email, only: [:show, :edit, :update, :destroy]
   def index
     @group_emails = GroupEmail.all
   end
@@ -52,18 +51,18 @@ class GroupEmailsController < ApplicationController
 
   private
 
-    def set_group_email
-      @group_email = GroupEmail.find(params[:id])
-    end
+  def set_group_email
+    @group_email = GroupEmail.find(params[:id])
+  end
 
-    def group_email_params
-      params.require(:group_email).permit(:message_subject, :message_body,
-      group_email_recipients_attributes: [
-          :id,
-          :recipient_id,
-          :group_email_id,
-          :_destroy
-      ]
-      )
-    end
+  def group_email_params
+    params.require(:group_email).permit(:message_subject, :message_body,
+                                        group_email_recipients_attributes: [
+                                            :id,
+                                            :recipient_id,
+                                            :group_email_id,
+                                            :_destroy
+                                        ]
+    )
+  end
 end

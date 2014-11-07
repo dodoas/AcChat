@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'custom_error/index'
+
   resources :contacts
 
   mount Ckeditor::Engine => '/ckeditor'
