@@ -1,0 +1,26 @@
+<% if current_user.has_role? :admin %>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Message subject:</strong>
+  <%= @group_email.message_subject %>
+</p>
+
+<p>
+  <strong>Message body:</strong>
+  <%= @group_email.message_body %>
+</p>
+
+<%= link_to 'Edit', edit_group_email_path(@group_email) %> |
+<%= link_to 'Back', group_emails_path %>
+<% else %>
+    <div class="jumbotron">
+      <h1>Hello <%= current_user.first_name %></h1>
+      <div class="alert alert-danger" role="alert">
+        <p>Dear you have no right to access this page !!!<br>
+          Please go back !!!</p>
+      </div>
+      <p><%= link_to "Dashboard", dashboard_index_path, :class => 'btn btn-primary btn-lg' %></p>
+      <p><%= link_to "Emails Dashboard", emails_path, :class => 'btn btn-primary btn-lg' %></p>
+    </div>
+<% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141106092111) do
+ActiveRecord::Schema.define(version: 20141107071857) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,16 @@ ActiveRecord::Schema.define(version: 20141106092111) do
     t.datetime "updated_at"
   end
 
+  create_table "group_emails", force: true do |t|
+    t.string   "message_subject"
+    t.text     "message_body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "sender_id_id"
+  end
+
+  add_index "group_emails", ["sender_id_id"], name: "index_group_emails_on_sender_id_id", using: :btree
+
   create_table "roles", force: true do |t|
     t.string   "name"
     t.integer  "resource_id"
@@ -68,9 +78,11 @@ ActiveRecord::Schema.define(version: 20141106092111) do
     t.datetime "updated_at"
     t.string   "first_name"
     t.string   "last_name"
+    t.integer  "group_email_id_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["group_email_id_id"], name: "index_users_on_group_email_id_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "users_roles", id: false, force: true do |t|

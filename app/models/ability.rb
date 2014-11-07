@@ -1,10 +1,10 @@
 class Ability
   include CanCan::Ability
 
-  def initialize(user)
+  def initialize(current_user)
 
-       user ||= User.new
-       if user.admin?
+       current_user ||= User.new
+       if current_user.admin?
          can :manage, :all
        else
          can :read, Email

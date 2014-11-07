@@ -1,0 +1,2 @@
+module GroupEmailsHelper
+end
