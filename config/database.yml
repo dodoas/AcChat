@@ -14,6 +14,6 @@ test:
 
 production:
   <<: *default
-  database: postgres
-  username: popac
-  password: popac
+  database: d4vs4sopc51tpj
+  username: spnnbadltyxagd
+  password: i81pd8lavip-b6t5CbI4nwD2Bc
