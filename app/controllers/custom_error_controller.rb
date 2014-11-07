@@ -1,6 +1,6 @@
 class CustomErrorController < ApplicationController
   layout '403'
-  def index
+  def error_403
 
   end
 end

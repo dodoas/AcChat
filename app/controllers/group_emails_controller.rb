@@ -1,7 +1,15 @@
 class GroupEmailsController < ApplicationController
-    before_action :set_group_email, only: [:show, :edit, :update, :destroy]
+
+  before_action :set_group_email, only: [:show, :edit, :update, :destroy]
+
+
   def index
-    @group_emails = GroupEmail.all
+
+    if current_user.has_role? :admin
+      @group_emails = GroupEmail.all
+    else
+      redirect_to_403
+    end
   end
 
   def show
@@ -65,4 +73,9 @@ class GroupEmailsController < ApplicationController
                                         ]
     )
   end
+
+  def redirect_to_403
+    redirect_to({:controller => 'custom_error', :action => 'error_403'})
+  end
+
 end

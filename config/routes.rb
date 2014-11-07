@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'custom_error/index'
+  get 'custom_error/error_403'
 
   resources :contacts
 
