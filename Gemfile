@@ -33,3 +33,4 @@ gem "nested_form"
 gem 'ckeditor'
 gem 'paperclip'
 gem 'bootstrap-select-rails'
+gem "unicorn-rails"
