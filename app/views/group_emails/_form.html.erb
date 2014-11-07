@@ -1,38 +1,49 @@
-<%= form_for @group_email, :html => { :class => "form-horizontal group_email" } do |f| %>
+<div class="row">
+  <%= nested_form_for @group_email, :html => {:class => "form-horizontal group_email"} do |f| %>
 
-    <% if @group_email.errors.any? %>
-    <div id="error_expl" class="panel panel-danger">
-      <div class="panel-heading">
-        <h3 class="panel-title"><%= pluralize(@group_email.errors.count, "error") %> prohibited this group_email from being saved:</h3>
+      <% if @group_email.errors.any? %>
+          <div id="error_expl" class="panel panel-danger">
+            <div class="panel-heading">
+              <h3 class="panel-title"><%= pluralize(@group_email.errors.count, "error") %> prohibited this group_email
+                from being saved:</h3>
+            </div>
+            <div class="panel-body">
+              <ul>
+                <% @group_email.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+      <% end %>
+      <div class="col-md-8">
+        <div class="control-group">
+          <%= f.label :message_subject, :class => 'control-label' %>
+          <div class="controls">
+            <%= f.text_field :message_subject, :class => 'form-control' %>
+          </div>
+          <%= error_span(@group_email[:message_subject]) %>
+        </div>
+        <div class="control-group">
+          <%= f.label :message_body, :class => 'control-label' %>
+          <div class="controls">
+            <%= f.cktext_area :message_body, :class => 'form-control', :ckeditor => {:language => 'en'} %>
+          </div>
+          <%= error_span(@group_email[:message_body]) %>
+        </div>
       </div>
-      <div class="panel-body">
-        <ul>
-        <% @group_email.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
+      <div class="col-md-4">
+        <%= f.fields_for :recipients do |r| %>
         <% end %>
-        </ul>
       </div>
-    </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+          <%= f.submit nil, :class => 'btn btn-primary' %>
+          <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                      group_emails_path, :class => 'btn btn-default' %>
+            </div>
+        </div>
+      </div>
   <% end %>
-
-  <div class="control-group">
-    <%= f.label :message_subject, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :message_subject, :class => 'form-control' %>
-    </div>
-    <%= error_span(@group_email[:message_subject]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :message_body, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.cktext_area :message_body, :class => 'form-control', :ckeditor => {:language => 'no'} %>
-    </div>
-    <%= error_span(@group_email[:message_body]) %>
-  </div>
-
-
-  <%= f.submit nil, :class => 'btn btn-primary' %>
-  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-            group_emails_path, :class => 'btn btn-default' %>
-
-<% end %>

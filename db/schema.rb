@@ -94,11 +94,11 @@ ActiveRecord::Schema.define(version: 20141107094209) do
     t.datetime "updated_at"
     t.string   "first_name"
     t.string   "last_name"
-    t.integer  "group_email_id_id"
+    t.integer  "group_email_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["group_email_id_id"], name: "index_users_on_group_email_id_id", using: :btree
+  add_index "users", ["group_email_id"], name: "index_users_on_group_email_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "users_roles", id: false, force: true do |t|

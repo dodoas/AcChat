@@ -1,28 +1,21 @@
 class GroupEmailsController < ApplicationController
   before_action :set_group_email, only: [:show, :edit, :update, :destroy]
 
-  # GET /group_emails
-  # GET /group_emails.json
   def index
     @group_emails = GroupEmail.all
   end
 
-  # GET /group_emails/1
-  # GET /group_emails/1.json
   def show
   end
 
-  # GET /group_emails/new
   def new
     @group_email = GroupEmail.new
+    @group_email.recipients.build
   end
 
-  # GET /group_emails/1/edit
   def edit
   end
 
-  # POST /group_emails
-  # POST /group_emails.json
   def create
     @group_email = GroupEmail.new(group_email_params)
 
@@ -37,8 +30,6 @@ class GroupEmailsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /group_emails/1
-  # PATCH/PUT /group_emails/1.json
   def update
     respond_to do |format|
       if @group_email.update(group_email_params)
@@ -51,8 +42,6 @@ class GroupEmailsController < ApplicationController
     end
   end
 
-  # DELETE /group_emails/1
-  # DELETE /group_emails/1.json
   def destroy
     @group_email.destroy
     respond_to do |format|
@@ -62,12 +51,11 @@ class GroupEmailsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_group_email
       @group_email = GroupEmail.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def group_email_params
       params.require(:group_email).permit(:message_subject, :message_body)
     end
