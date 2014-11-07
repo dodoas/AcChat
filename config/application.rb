@@ -21,5 +21,6 @@ module AcChat
     # config.i18n.default_locale = :de
     config.app_generators.scaffold_controller = :scaffold_controller
     config.serve_static_assets = true
+    config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
   end
 end

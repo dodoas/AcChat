@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_nested_form
+//= require ckeditor/init
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require turbolinks

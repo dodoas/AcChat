@@ -79922,3 +79922,534 @@ ActionController::RoutingError (No route matches [GET] "/skins/moono/editor.css"
   Rendered /home/popac/.rbenv/versions/2.1.4/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/routes/_route.html.erb (6.6ms)
   Rendered /home/popac/.rbenv/versions/2.1.4/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/routes/_table.html.erb (2.1ms)
   Rendered /home/popac/.rbenv/versions/2.1.4/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (59.7ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateCkeditorAssets (20141107094209)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (177.3ms)[0m  [1mCREATE TABLE "ckeditor_assets" ("id" serial primary key, "data_file_name" character varying(255) NOT NULL, "data_content_type" character varying(255), "data_file_size" integer, "assetable_id" integer, "assetable_type" character varying(30), "type" character varying(30), "width" integer, "height" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (39.0ms)[0m  CREATE  INDEX  "idx_ckeditor_assetable_type" ON "ckeditor_assets"  ("assetable_type", "type", "assetable_id")
+  [1m[36m (40.3ms)[0m  [1mCREATE  INDEX  "idx_ckeditor_assetable" ON "ckeditor_assets"  ("assetable_type", "assetable_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141107094209"]]
+  [1m[36m (21.1ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.3ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+
+
+Started GET "/group_emails/new" for 127.0.0.1 at 2014-11-07 09:54:21 +0100
+
+ArgumentError - Invalid route name, already in use: 'ckeditor' 
+You may have defined two routes with the same name using the `:as` option, or you may be overriding a route already defined by a resource with the same naming. For the latter, you can restrict the routes created with `resources` as explained here: 
+http://guides.rubyonrails.org/routing.html#restricting-the-routes-created:
+  actionpack (4.1.7) lib/action_dispatch/routing/route_set.rb:430:in `add_route'
+  actionpack (4.1.7) lib/action_dispatch/routing/mapper.rb:1495:in `add_route'
+  actionpack (4.1.7) lib/action_dispatch/routing/mapper.rb:1472:in `decomposed_match'
+  actionpack (4.1.7) lib/action_dispatch/routing/mapper.rb:1453:in `block in match'
+  actionpack (4.1.7) lib/action_dispatch/routing/mapper.rb:1443:in `match'
+  actionpack (4.1.7) lib/action_dispatch/routing/mapper.rb:536:in `mount'
+  config/routes.rb:10:in `block in <top (required)>'
+  actionpack (4.1.7) lib/action_dispatch/routing/route_set.rb:337:in `eval_block'
+  actionpack (4.1.7) lib/action_dispatch/routing/route_set.rb:315:in `draw'
+  config/routes.rb:1:in `<top (required)>'
+  activesupport (4.1.7) lib/active_support/dependencies.rb:241:in `block in load'
+  activesupport (4.1.7) lib/active_support/dependencies.rb:232:in `load_dependency'
+  activesupport (4.1.7) lib/active_support/dependencies.rb:241:in `load'
+  railties (4.1.7) lib/rails/application/routes_reloader.rb:40:in `block in load_paths'
+  railties (4.1.7) lib/rails/application/routes_reloader.rb:40:in `load_paths'
+  railties (4.1.7) lib/rails/application/routes_reloader.rb:16:in `reload!'
+  railties (4.1.7) lib/rails/application/routes_reloader.rb:26:in `block in updater'
+  activesupport (4.1.7) lib/active_support/file_update_checker.rb:75:in `execute'
+  railties (4.1.7) lib/rails/application/routes_reloader.rb:7:in `execute'
+  railties (4.1.7) lib/rails/application/finisher.rb:83:in `block (2 levels) in <module:Finisher>'
+  activesupport (4.1.7) lib/active_support/callbacks.rb:438:in `block in make_lambda'
+  activesupport (4.1.7) lib/active_support/callbacks.rb:184:in `block in simple'
+  activesupport (4.1.7) lib/active_support/callbacks.rb:185:in `block in simple'
+  activesupport (4.1.7) lib/active_support/callbacks.rb:185:in `block in simple'
+  activesupport (4.1.7) lib/active_support/callbacks.rb:185:in `block in simple'
+  activesupport (4.1.7) lib/active_support/callbacks.rb:185:in `block in simple'
+  activesupport (4.1.7) lib/active_support/callbacks.rb:185:in `block in simple'
+  activesupport (4.1.7) lib/active_support/callbacks.rb:86:in `run_callbacks'
+  actionpack (4.1.7) lib/action_dispatch/middleware/reloader.rb:83:in `prepare!'
+  actionpack (4.1.7) lib/action_dispatch/middleware/reloader.rb:71:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/remote_ip.rb:76:in `call'
+  better_errors (2.0.0) lib/better_errors/middleware.rb:84:in `protected_app_call'
+  better_errors (2.0.0) lib/better_errors/middleware.rb:79:in `better_errors_call'
+  better_errors (2.0.0) lib/better_errors/middleware.rb:57:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.7) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.7) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.7) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.7) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.7) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.7) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.7) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/static.rb:84:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.7) lib/rails/engine.rb:514:in `call'
+  railties (4.1.7) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /home/popac/.rbenv/versions/2.1.4/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /home/popac/.rbenv/versions/2.1.4/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /home/popac/.rbenv/versions/2.1.4/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+
+Started POST "/__better_errors/689987eb547628dc/variables" for 127.0.0.1 at 2014-11-07 09:54:21 +0100
+
+
+Started GET "/group_emails/new" for 127.0.0.1 at 2014-11-07 09:54:45 +0100
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by GroupEmailsController#new as HTML
+  [1m[35mUser Load (1.3ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  Rendered group_emails/_form.html.erb (26.4ms)
+  Rendered group_emails/new.html.erb within layouts/application (55.0ms)
+  Rendered layouts_partials/_top_nav.html.erb (5.5ms)
+  Rendered layouts_partials/_footer.html.erb (0.7ms)
+Completed 200 OK in 1271ms (Views: 1191.1ms | ActiveRecord: 6.6ms)
+
+
+Started GET "/assets/ckeditor/init.js?body=1" for 127.0.0.1 at 2014-11-07 09:54:47 +0100
+
+
+Started GET "/assets/ckeditor/ckeditor.js?body=1" for 127.0.0.1 at 2014-11-07 09:54:47 +0100
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2014-11-07 09:54:47 +0100
+
+
+Started GET "/assets/application-layout.css?body=1" for 127.0.0.1 at 2014-11-07 09:54:47 +0100
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2014-11-07 09:54:47 +0100
+
+
+Started GET "/assets/bootstrap.min.css?body=1" for 127.0.0.1 at 2014-11-07 09:54:47 +0100
+
+
+Started GET "/assets/dashboard.css?body=1" for 127.0.0.1 at 2014-11-07 09:54:47 +0100
+
+
+Started GET "/assets/dataTables.bootstrap.css?body=1" for 127.0.0.1 at 2014-11-07 09:54:47 +0100
+
+
+Started GET "/assets/emails.css?body=1" for 127.0.0.1 at 2014-11-07 09:54:47 +0100
+
+
+Started GET "/assets/group_emails.css?body=1" for 127.0.0.1 at 2014-11-07 09:54:47 +0100
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2014-11-07 09:54:47 +0100
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-11-07 09:54:47 +0100
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-11-07 09:54:47 +0100
+
+
+Started GET "/assets/jquery.turbolinks.js?body=1" for 127.0.0.1 at 2014-11-07 09:54:47 +0100
+
+
+Started GET "/assets/jquery_nested_form.js?body=1" for 127.0.0.1 at 2014-11-07 09:54:47 +0100
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-11-07 09:54:47 +0100
+
+
+Started GET "/assets/twitter/bootstrap/transition.js?body=1" for 127.0.0.1 at 2014-11-07 09:54:47 +0100
+
+
+Started GET "/assets/twitter/bootstrap/modal.js?body=1" for 127.0.0.1 at 2014-11-07 09:54:47 +0100
+
+
+Started GET "/assets/twitter/bootstrap/alert.js?body=1" for 127.0.0.1 at 2014-11-07 09:54:47 +0100
+
+
+Started GET "/assets/twitter/bootstrap/scrollspy.js?body=1" for 127.0.0.1 at 2014-11-07 09:54:47 +0100
+
+
+Started GET "/assets/twitter/bootstrap/dropdown.js?body=1" for 127.0.0.1 at 2014-11-07 09:54:47 +0100
+
+
+Started GET "/assets/twitter/bootstrap/tab.js?body=1" for 127.0.0.1 at 2014-11-07 09:54:47 +0100
+
+
+Started GET "/assets/twitter/bootstrap/tooltip.js?body=1" for 127.0.0.1 at 2014-11-07 09:54:47 +0100
+
+
+Started GET "/assets/twitter/bootstrap/popover.js?body=1" for 127.0.0.1 at 2014-11-07 09:54:47 +0100
+
+
+Started GET "/assets/twitter/bootstrap/button.js?body=1" for 127.0.0.1 at 2014-11-07 09:54:47 +0100
+
+
+Started GET "/assets/twitter/bootstrap/collapse.js?body=1" for 127.0.0.1 at 2014-11-07 09:54:47 +0100
+
+
+Started GET "/assets/twitter/bootstrap/carousel.js?body=1" for 127.0.0.1 at 2014-11-07 09:54:47 +0100
+
+
+Started GET "/assets/twitter/bootstrap/affix.js?body=1" for 127.0.0.1 at 2014-11-07 09:54:47 +0100
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2014-11-07 09:54:47 +0100
+
+
+Started GET "/assets/dashboard.js?body=1" for 127.0.0.1 at 2014-11-07 09:54:47 +0100
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-11-07 09:54:47 +0100
+
+
+Started GET "/assets/dataTables/dataTables.bootstrap.js?body=1" for 127.0.0.1 at 2014-11-07 09:54:47 +0100
+
+
+Started GET "/assets/dataTables/jquery.dataTables.js?body=1" for 127.0.0.1 at 2014-11-07 09:54:47 +0100
+
+
+Started GET "/assets/emails.js?body=1" for 127.0.0.1 at 2014-11-07 09:54:47 +0100
+
+
+Started GET "/assets/group_emails.js?body=1" for 127.0.0.1 at 2014-11-07 09:54:47 +0100
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-11-07 09:54:47 +0100
+
+
+Started GET "/assets/bootstrap.min.css" for 127.0.0.1 at 2014-11-07 09:54:48 +0100
+
+
+Started GET "/assets/vector-viking-shaded.png" for 127.0.0.1 at 2014-11-07 09:54:48 +0100
+
+
+Started GET "/assets/ckeditor/config.js?t=E5OD" for 127.0.0.1 at 2014-11-07 09:54:48 +0100
+
+
+Started GET "/assets/ckeditor/skins/moono/editor_gecko.css?t=E5OD" for 127.0.0.1 at 2014-11-07 09:54:48 +0100
+
+
+Started GET "/assets/ckeditor/lang/uk.js?t=E5OD" for 127.0.0.1 at 2014-11-07 09:54:48 +0100
+
+
+Started GET "/assets/ckeditor/styles.js?t=E5OD" for 127.0.0.1 at 2014-11-07 09:54:48 +0100
+
+
+Started GET "/assets/ckeditor/skins/moono/icons.png" for 127.0.0.1 at 2014-11-07 09:54:48 +0100
+
+
+Started GET "/assets/ckeditor/contents.css?t=E5OD" for 127.0.0.1 at 2014-11-07 09:54:48 +0100
+
+
+Started GET "/group_emails/new" for 127.0.0.1 at 2014-11-07 09:55:26 +0100
+Processing by GroupEmailsController#new as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  Rendered group_emails/_form.html.erb (8.7ms)
+  Rendered group_emails/new.html.erb within layouts/application (10.8ms)
+  Rendered layouts_partials/_top_nav.html.erb (1.2ms)
+  Rendered layouts_partials/_footer.html.erb (0.1ms)
+Completed 200 OK in 800ms (Views: 796.5ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2014-11-07 09:55:27 +0100
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-11-07 09:55:27 +0100
+
+
+Started GET "/assets/application-layout.css?body=1" for 127.0.0.1 at 2014-11-07 09:55:27 +0100
+
+
+Started GET "/assets/bootstrap.min.css?body=1" for 127.0.0.1 at 2014-11-07 09:55:27 +0100
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2014-11-07 09:55:27 +0100
+
+
+Started GET "/assets/emails.css?body=1" for 127.0.0.1 at 2014-11-07 09:55:27 +0100
+
+
+Started GET "/assets/group_emails.css?body=1" for 127.0.0.1 at 2014-11-07 09:55:27 +0100
+
+
+Started GET "/assets/dataTables.bootstrap.css?body=1" for 127.0.0.1 at 2014-11-07 09:55:27 +0100
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2014-11-07 09:55:27 +0100
+
+
+Started GET "/assets/dashboard.css?body=1" for 127.0.0.1 at 2014-11-07 09:55:27 +0100
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-11-07 09:55:27 +0100
+
+
+Started GET "/assets/jquery.turbolinks.js?body=1" for 127.0.0.1 at 2014-11-07 09:55:27 +0100
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-11-07 09:55:27 +0100
+
+
+Started GET "/assets/jquery_nested_form.js?body=1" for 127.0.0.1 at 2014-11-07 09:55:27 +0100
+
+
+Started GET "/assets/ckeditor/init.js?body=1" for 127.0.0.1 at 2014-11-07 09:55:27 +0100
+
+
+Started GET "/assets/ckeditor/ckeditor.js?body=1" for 127.0.0.1 at 2014-11-07 09:55:27 +0100
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-11-07 09:55:27 +0100
+
+
+Started GET "/assets/twitter/bootstrap/transition.js?body=1" for 127.0.0.1 at 2014-11-07 09:55:27 +0100
+
+
+Started GET "/assets/twitter/bootstrap/alert.js?body=1" for 127.0.0.1 at 2014-11-07 09:55:27 +0100
+
+
+Started GET "/assets/twitter/bootstrap/modal.js?body=1" for 127.0.0.1 at 2014-11-07 09:55:27 +0100
+
+
+Started GET "/assets/twitter/bootstrap/dropdown.js?body=1" for 127.0.0.1 at 2014-11-07 09:55:27 +0100
+
+
+Started GET "/assets/twitter/bootstrap/scrollspy.js?body=1" for 127.0.0.1 at 2014-11-07 09:55:27 +0100
+
+
+Started GET "/assets/twitter/bootstrap/tab.js?body=1" for 127.0.0.1 at 2014-11-07 09:55:27 +0100
+
+
+Started GET "/assets/twitter/bootstrap/tooltip.js?body=1" for 127.0.0.1 at 2014-11-07 09:55:27 +0100
+
+
+Started GET "/assets/twitter/bootstrap/popover.js?body=1" for 127.0.0.1 at 2014-11-07 09:55:27 +0100
+
+
+Started GET "/assets/twitter/bootstrap/button.js?body=1" for 127.0.0.1 at 2014-11-07 09:55:27 +0100
+
+
+Started GET "/assets/twitter/bootstrap/affix.js?body=1" for 127.0.0.1 at 2014-11-07 09:55:27 +0100
+
+
+Started GET "/assets/twitter/bootstrap/collapse.js?body=1" for 127.0.0.1 at 2014-11-07 09:55:27 +0100
+
+
+Started GET "/assets/twitter/bootstrap/carousel.js?body=1" for 127.0.0.1 at 2014-11-07 09:55:27 +0100
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2014-11-07 09:55:27 +0100
+
+
+Started GET "/assets/dashboard.js?body=1" for 127.0.0.1 at 2014-11-07 09:55:27 +0100
+
+
+Started GET "/assets/dataTables/dataTables.bootstrap.js?body=1" for 127.0.0.1 at 2014-11-07 09:55:27 +0100
+
+
+Started GET "/assets/dataTables/jquery.dataTables.js?body=1" for 127.0.0.1 at 2014-11-07 09:55:27 +0100
+
+
+Started GET "/assets/group_emails.js?body=1" for 127.0.0.1 at 2014-11-07 09:55:27 +0100
+
+
+Started GET "/assets/bootstrap.min.css" for 127.0.0.1 at 2014-11-07 09:55:27 +0100
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-11-07 09:55:27 +0100
+
+
+Started GET "/assets/emails.js?body=1" for 127.0.0.1 at 2014-11-07 09:55:27 +0100
+
+
+Started GET "/assets/vector-viking-shaded.png" for 127.0.0.1 at 2014-11-07 09:55:28 +0100
+
+
+Started GET "/assets/ckeditor/config.js?t=E5OD" for 127.0.0.1 at 2014-11-07 09:55:28 +0100
+
+
+Started GET "/assets/ckeditor/skins/moono/editor_gecko.css?t=E5OD" for 127.0.0.1 at 2014-11-07 09:55:28 +0100
+
+
+Started GET "/assets/ckeditor/lang/uk.js?t=E5OD" for 127.0.0.1 at 2014-11-07 09:55:28 +0100
+
+
+Started GET "/assets/ckeditor/styles.js?t=E5OD" for 127.0.0.1 at 2014-11-07 09:55:28 +0100
+
+
+Started GET "/assets/ckeditor/skins/moono/icons.png" for 127.0.0.1 at 2014-11-07 09:55:28 +0100
+
+
+Started GET "/assets/ckeditor/contents.css?t=E5OD" for 127.0.0.1 at 2014-11-07 09:55:28 +0100
+
+
+Started GET "/assets/ckeditor/skins/moono/editor_gecko.css?t=E5OD" for 127.0.0.1 at 2014-11-07 09:55:37 +0100
+
+
+Started GET "/assets/ckeditor/contents.css?t=E5OD" for 127.0.0.1 at 2014-11-07 09:55:37 +0100
+
+
+Started GET "/assets/ckeditor/plugins/image/dialogs/image.js?t=E5OD" for 127.0.0.1 at 2014-11-07 09:55:56 +0100
+
+
+Started GET "/assets/ckeditor/skins/moono/dialog.css?t=E5OD" for 127.0.0.1 at 2014-11-07 09:55:56 +0100
+
+
+Started GET "/assets/ckeditor/skins/moono/images/close.png" for 127.0.0.1 at 2014-11-07 09:55:57 +0100
+
+
+Started GET "/assets/ckeditor/skins/moono/images/refresh.png" for 127.0.0.1 at 2014-11-07 09:55:57 +0100
+
+
+Started GET "/assets/ckeditor/skins/moono/images/lock.png" for 127.0.0.1 at 2014-11-07 09:55:57 +0100
+
+
+Started GET "/group_emails/new" for 127.0.0.1 at 2014-11-07 09:56:16 +0100
+Processing by GroupEmailsController#new as HTML
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  Rendered group_emails/_form.html.erb (5.3ms)
+  Rendered group_emails/new.html.erb within layouts/application (7.0ms)
+  Rendered layouts_partials/_top_nav.html.erb (1.2ms)
+  Rendered layouts_partials/_footer.html.erb (0.1ms)
+Completed 200 OK in 757ms (Views: 754.0ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/twitter/bootstrap/tab.js?body=1" for 127.0.0.1 at 2014-11-07 09:56:17 +0100
+
+
+Started GET "/assets/twitter/bootstrap/tooltip.js?body=1" for 127.0.0.1 at 2014-11-07 09:56:17 +0100
+
+
+Started GET "/assets/twitter/bootstrap/scrollspy.js?body=1" for 127.0.0.1 at 2014-11-07 09:56:17 +0100
+
+
+Started GET "/assets/dashboard.js?body=1" for 127.0.0.1 at 2014-11-07 09:56:17 +0100
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2014-11-07 09:56:17 +0100
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-11-07 09:56:17 +0100
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2014-11-07 09:56:17 +0100
+
+
+Started GET "/assets/dataTables/dataTables.bootstrap.js?body=1" for 127.0.0.1 at 2014-11-07 09:56:17 +0100
+
+
+Started GET "/assets/dataTables/jquery.dataTables.js?body=1" for 127.0.0.1 at 2014-11-07 09:56:17 +0100
+
+
+Started GET "/assets/emails.js?body=1" for 127.0.0.1 at 2014-11-07 09:56:17 +0100
+
+
+Started GET "/assets/group_emails.js?body=1" for 127.0.0.1 at 2014-11-07 09:56:17 +0100
+
+
+Started GET "/assets/application-layout.css?body=1" for 127.0.0.1 at 2014-11-07 09:56:17 +0100
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-11-07 09:56:17 +0100
+
+
+Started GET "/assets/bootstrap.min.css?body=1" for 127.0.0.1 at 2014-11-07 09:56:17 +0100
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2014-11-07 09:56:17 +0100
+
+
+Started GET "/assets/dashboard.css?body=1" for 127.0.0.1 at 2014-11-07 09:56:17 +0100
+
+
+Started GET "/assets/dataTables.bootstrap.css?body=1" for 127.0.0.1 at 2014-11-07 09:56:17 +0100
+
+
+Started GET "/assets/emails.css?body=1" for 127.0.0.1 at 2014-11-07 09:56:17 +0100
+
+
+Started GET "/assets/group_emails.css?body=1" for 127.0.0.1 at 2014-11-07 09:56:17 +0100
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2014-11-07 09:56:17 +0100
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-11-07 09:56:17 +0100
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-11-07 09:56:17 +0100
+
+
+Started GET "/assets/jquery.turbolinks.js?body=1" for 127.0.0.1 at 2014-11-07 09:56:17 +0100
+
+
+Started GET "/assets/jquery_nested_form.js?body=1" for 127.0.0.1 at 2014-11-07 09:56:17 +0100
+
+
+Started GET "/assets/ckeditor/init.js?body=1" for 127.0.0.1 at 2014-11-07 09:56:17 +0100
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-11-07 09:56:17 +0100
+
+
+Started GET "/assets/ckeditor/ckeditor.js?body=1" for 127.0.0.1 at 2014-11-07 09:56:17 +0100
+
+
+Started GET "/assets/twitter/bootstrap/alert.js?body=1" for 127.0.0.1 at 2014-11-07 09:56:17 +0100
+
+
+Started GET "/assets/twitter/bootstrap/transition.js?body=1" for 127.0.0.1 at 2014-11-07 09:56:17 +0100
+
+
+Started GET "/assets/twitter/bootstrap/modal.js?body=1" for 127.0.0.1 at 2014-11-07 09:56:17 +0100
+
+
+Started GET "/assets/twitter/bootstrap/dropdown.js?body=1" for 127.0.0.1 at 2014-11-07 09:56:17 +0100
+
+
+Started GET "/assets/twitter/bootstrap/popover.js?body=1" for 127.0.0.1 at 2014-11-07 09:56:17 +0100
+
+
+Started GET "/assets/twitter/bootstrap/button.js?body=1" for 127.0.0.1 at 2014-11-07 09:56:17 +0100
+
+
+Started GET "/assets/twitter/bootstrap/collapse.js?body=1" for 127.0.0.1 at 2014-11-07 09:56:17 +0100
+
+
+Started GET "/assets/twitter/bootstrap/carousel.js?body=1" for 127.0.0.1 at 2014-11-07 09:56:17 +0100
+
+
+Started GET "/assets/twitter/bootstrap/affix.js?body=1" for 127.0.0.1 at 2014-11-07 09:56:17 +0100
+
+
+Started GET "/assets/bootstrap.min.css" for 127.0.0.1 at 2014-11-07 09:56:17 +0100
+
+
+Started GET "/assets/vector-viking-shaded.png" for 127.0.0.1 at 2014-11-07 09:56:18 +0100
+
+
+Started GET "/assets/ckeditor/config.js?t=E5OD" for 127.0.0.1 at 2014-11-07 09:56:18 +0100
+
+
+Started GET "/assets/ckeditor/skins/moono/editor_gecko.css?t=E5OD" for 127.0.0.1 at 2014-11-07 09:56:18 +0100
+
+
+Started GET "/assets/ckeditor/lang/no.js?t=E5OD" for 127.0.0.1 at 2014-11-07 09:56:18 +0100
+
+
+Started GET "/assets/ckeditor/styles.js?t=E5OD" for 127.0.0.1 at 2014-11-07 09:56:18 +0100
+
+
+Started GET "/assets/ckeditor/skins/moono/icons.png" for 127.0.0.1 at 2014-11-07 09:56:18 +0100
+
+
+Started GET "/assets/ckeditor/contents.css?t=E5OD" for 127.0.0.1 at 2014-11-07 09:56:18 +0100
+
+
+Started GET "/assets/ckeditor/skins/moono/editor_gecko.css?t=E5OD" for 127.0.0.1 at 2014-11-07 09:56:23 +0100
+
+
+Started GET "/assets/ckeditor/contents.css?t=E5OD" for 127.0.0.1 at 2014-11-07 09:56:24 +0100
