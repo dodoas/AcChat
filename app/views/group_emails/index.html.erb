@@ -20,7 +20,7 @@
         <td><%= link_to group_email.id, group_email_path(group_email) %></td>
         <td><%= group_email.message_subject %></td>
         <td><%= group_email.message_body %></td>
-        <td><%= group_email.sender_id_id %></td>
+        <td><%= group_email.sender_id %></td>
         <td><%=l group_email.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),

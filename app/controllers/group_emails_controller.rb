@@ -10,7 +10,7 @@ class GroupEmailsController < ApplicationController
 
   def new
     @group_email = GroupEmail.new
-    @group_email.recipients.build
+    @group_email.group_email_recipients.build
   end
 
   def edit
@@ -18,7 +18,7 @@ class GroupEmailsController < ApplicationController
 
   def create
     @group_email = GroupEmail.new(group_email_params)
-
+    @group_email.sender_id = current_user.id
     respond_to do |format|
       if @group_email.save
         format.html { redirect_to @group_email, notice: 'Group email was successfully created.' }
@@ -57,6 +57,13 @@ class GroupEmailsController < ApplicationController
     end
 
     def group_email_params
-      params.require(:group_email).permit(:message_subject, :message_body)
+      params.require(:group_email).permit(:message_subject, :message_body,
+      group_email_recipients_attributes: [
+          :id,
+          :recipient_id,
+          :group_email_id,
+          :_destroy
+      ]
+      )
     end
 end

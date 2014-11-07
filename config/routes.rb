@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
   resources :group_emails
   resources :emails
+  resources :dashboard
   get 'home/index'
   get 'dashboard/index'
   devise_for :users

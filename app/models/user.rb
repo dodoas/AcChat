@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable#,
          #:confirmable, :lockable, :timeoutable
   belongs_to :group_email
+  has_many :group_emails
   has_many :emails
   scope :user, -> (u) { where( :id => u ) }
 end

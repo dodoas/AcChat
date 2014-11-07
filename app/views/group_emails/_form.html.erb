@@ -1,6 +1,8 @@
 <div class="row">
   <%= nested_form_for @group_email, :html => {:class => "form-horizontal group_email"} do |f| %>
-
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                  group_emails_path, :class => 'btn btn-default' %>
       <% if @group_email.errors.any? %>
           <div id="error_expl" class="panel panel-danger">
             <div class="panel-heading">
@@ -34,25 +36,17 @@
       </div>
       <div class="col-md-4">
         <div class="well">
-          <%= f.fields_for :recipients do |r| %>
+          <%= f.fields_for :group_email_recipients do |r| %>
               <ul class="list-group">
                 <li class="list-group-item">
                   <span class="badge"><%= r.link_to_remove "Remove recipient" %></span>
-                  <%= r.select :id, User.all.map { |v| [v.first_name, v.id] } %>
+                  <%= r.select :recipient_id, User.all.map { |v| [v.email, v.id] }
+                  %>
                 </li>
               </ul>
           <% end %>
-          <p><%= f.link_to_add "Add a recipient", :recipients %></p>
+          <p><%= f.link_to_add "Add a recipient", :group_email_recipients, :class => 'btn btn-default' %></p>
         </div>
       </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="form-group">
-            <%= f.submit nil, :class => 'btn btn-primary' %>
-            <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                        group_emails_path, :class => 'btn btn-default' %>
-          </div>
-        </div>
       </div>
   <% end %>
