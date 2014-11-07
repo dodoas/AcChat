@@ -25,16 +25,9 @@
   <div class="control-group">
     <%= f.label :message_body, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :message_body, :class => 'form-control' %>
+      <%= f.text_area :message_body, :class => '' %>
     </div>
     <%= error_span(@group_email[:message_body]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :sender_id_id, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :sender_id_id, :class => 'form-control' %>
-    </div>
-    <%= error_span(@group_email[:sender_id_id]) %>
   </div>
 
 
