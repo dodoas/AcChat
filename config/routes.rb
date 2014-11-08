@@ -12,4 +12,16 @@ Rails.application.routes.draw do
   devise_for :users
   root 'dashboard#index'
   match ':controller(/:action(/:id))', :via => [:get, :post]
+
+  ########################################################################################
+  ##                                                                                    ##
+  ##                          AJAX APIS                                                 ##
+  ##                                                                                    ##
+  ########################################################################################
+
+  namespace :api do
+    post 'email/save'
+    get 'email/save'
+  end
+
 end

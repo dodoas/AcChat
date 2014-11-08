@@ -1,5 +1,4 @@
-<%= form_for @email, :html => { :class => "form-horizontal email" } do |f| %>
-
+<%= form_for @email, :remote => true, :html => { :class => "form-horizontal email" } do |f| %>
     <% if @email.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
       <div class="panel-heading">
@@ -14,7 +13,6 @@
       </div>
     </div>
   <% end %>
-
   <div class="control-group">
     <%= f.label :recipient_id, :class => 'control-label' %>
     <div class="controls">
@@ -36,8 +34,5 @@
     </div>
     <%= error_span(@email[:message_body]) %>
   </div>
-
-
-  <%= f.submit nil, :class => 'btn btn-primary', :id => 'new_msg' %>
-
+  <%= f.submit nil, :class => 'btn btn-primary', :id => 'new_msg_click' %>
 <% end %>

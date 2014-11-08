@@ -1,9 +1,26 @@
 $(document).ready(function() {
-    $('#received').dataTable();
-    $('#send').dataTable();
     dialogMsg();
+    validateEmail();
 });
+function validateEmail() {
+    $("#new_email").validate({
 
+
+        rules: {
+            "email[message_subject]": {required: true},
+            "email[message_body]": {required: true}
+        },
+        messages: {
+            "email[message_subject]": {required: "Please Enter Message Subject!"},
+            "email[message_body]": {required: "Please Enter Message Body"}
+        },
+        submitHandler: function(form) {
+            saveMessage();
+            $("#dialog-form").dialog( "close" );
+        }
+
+    });
+}
 function dialogMsg() {
     var dialog;
     dialog = $( "#dialog-form" ).dialog({
@@ -13,7 +30,7 @@ function dialogMsg() {
         modal: true,
         buttons: {
             "Create an account": function() {
-                dialog.dialog( "close" );
+                $("#new_msg_click").trigger( "click" );
             },
             Cancel: function() {
                 dialog.dialog( "close" );
@@ -27,4 +44,27 @@ function dialogMsg() {
     $( "#create-user" ).button().on( "click", function() {
         dialog.dialog( "open" );
     });
+}
+
+function saveMessage() {
+    $.ajax({
+        url: 'create',
+        data: $(form).serialize(),
+        dataType: "json",
+        type: "POST",
+        beforeSend: function () {
+        },
+        success: function (response) {
+            $("#test").append(response);
+        },
+        complete: function (response) {
+
+        },
+        error: function (response) {
+
+            alert("Ajax error");
+
+        }
+    });
+
 }

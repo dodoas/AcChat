@@ -16,7 +16,7 @@ group :development do
   gem 'spring'
   gem "binding_of_caller"
   gem 'capistrano-rails'
-  gem 'rack-mini-profiler'
+  #gem 'rack-mini-profiler'
 end
 group :production do
   gem 'rails_12factor'
