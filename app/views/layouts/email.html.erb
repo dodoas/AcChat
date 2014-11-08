@@ -46,27 +46,33 @@
           height: 139px;
           border-bottom: 1px solid #ddd;
       }
+
       HEADER .super {
           background-color: #2D2D2D;
           padding-left: 16px;
       }
+
       HEADER .super a {
           display: inline-block;
           padding: 2px 8px;
           font-weight: bold;
           color: #aaa;
       }
+
       #logo {
-          margin:0 32px 0 16px;
+          margin: 0 32px 0 16px;
       }
+
       HEADER .search {
           padding: 4px;
           border-bottom: 1px solid #ddd;
           background-color: #f3f3f3;
       }
+
       HEADER .controls {
           padding: 8px 16px;
       }
+
       HEADER .controls h1 {
           margin: 0;
           font-size: 20px;
@@ -75,6 +81,7 @@
           display: inline-block;
           width: 160px;
       }
+
       #side {
           position: absolute;
           top: 140px;
@@ -85,6 +92,7 @@
           background-color: #f5f5f5;
           overflow: auto;
       }
+
       #content {
           position: absolute;
           top: 140px;
@@ -94,7 +102,7 @@
           overflow: auto;
       }
 
-      #content h2{
+      #content h2 {
           font-size: 16px;
           font-weight: normal;
       }
@@ -102,10 +110,12 @@
       .btn .caret {
           margin-left: 16px;
       }
+
       .unread-message {
           text-align: center;
           margin: 1em;
       }
+
       #compose-button {
           width: 120px;
           margin-bottom: 2em;
@@ -123,27 +133,27 @@
 <div class="container">
   <div class="row">
     <% if current_user.has_role? :admin %>
-    <div class="col-sm-3 col-md-2">
-      <div class="btn-group">
-        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-          Mail <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" role="menu">
-          <%= render :partial => 'layouts_partials/email_dropdown' %>
-        </ul>
-      </div>
-    </div>
+        <div class="col-sm-3 col-md-2">
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+              Mail <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <%= render :partial => 'layouts_partials/email_dropdown' %>
+            </ul>
+          </div>
+        </div>
     <% end %>
     <div class="col-sm-9 col-md-10">
     </div>
   </div>
   <hr>
   <div class="row">
-      <%= bootstrap_flash %>
-      <%= yield %>
-      </div>
-    </div>
+    <%= bootstrap_flash %>
+    <%= yield %>
   </div>
+</div>
+</div>
 </div>
 
 <div class="footer">
