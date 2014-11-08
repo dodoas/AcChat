@@ -18,7 +18,7 @@
             </div>
           </div>
       <% end %>
-      <div class="col-md-8">
+      <div class="col-md-6">
         <div class="control-group">
           <%= f.label :message_subject, :class => 'control-label' %>
           <div class="controls">
@@ -34,7 +34,7 @@
           <%= error_span(@group_email[:message_body]) %>
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-6">
         <div class="well">
           <%= f.fields_for :group_email_recipients do |r| %>
               <ul class="list-group">
