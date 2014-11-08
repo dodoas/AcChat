@@ -5,6 +5,7 @@ class EmailsController < ApplicationController
   def index
     @emails_Received = Email.received_messages(current_user.id).all
     @emails_Send = Email.send_messages(current_user.id).all
+    @email = Email.new
   end
 
   def show
