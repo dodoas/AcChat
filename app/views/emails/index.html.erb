@@ -58,7 +58,7 @@
       <% @emails_Send.each do |send| %>
           <tr>
             <td><%= link_to send.id, email_path(send) %></td>
-            <td><%= current_user.email %></td>
+            <td><%= send.recipient.email %></td>
             <td><%= send.message_subject %></td>
             <td><%=l send.created_at %></td>
               <% if current_user.has_role? :admin %>

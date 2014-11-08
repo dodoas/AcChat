@@ -1,8 +1,5 @@
 <div class="row">
   <%= nested_form_for @group_email, :html => {:class => "form-horizontal group_email"} do |f| %>
-      <%= f.submit nil, :class => 'btn btn-primary' %>
-      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                  group_emails_path, :class => 'btn btn-default' %>
       <% if @group_email.errors.any? %>
           <div id="error_expl" class="panel panel-danger">
             <div class="panel-heading">
@@ -19,6 +16,11 @@
           </div>
       <% end %>
       <div class="col-md-6">
+        <div class="form-group">
+          <%= f.submit nil, :class => 'btn btn-primary' %>
+          <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                      group_emails_path, :class => 'btn btn-default' %>
+        </div>
         <div class="control-group">
           <%= f.label :message_subject, :class => 'control-label' %>
           <div class="controls">
