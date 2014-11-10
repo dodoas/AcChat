@@ -8,8 +8,7 @@
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:message_subject) %></th>
-      <th><%= model_class.human_attribute_name(:message_body) %></th>
-      <th><%= model_class.human_attribute_name(:sender_id_id) %></th>
+      <th>Recipients</th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -19,8 +18,12 @@
       <tr>
         <td><%= link_to group_email.id, group_email_path(group_email) %></td>
         <td><%= group_email.message_subject %></td>
-        <td><%= group_email.message_body %></td>
-        <td><%= group_email.sender_id %></td>
+        <td><%= @recipients.to_group_email(group_email.id).each do |r| %>
+          <%= r.recipient.email.to_s %>
+          <%= r.recipient.first_name.to_s %>
+              <%= r.recipient.last_name.to_s %>
+            <% end %>
+              </td>
         <td><%=l group_email.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
