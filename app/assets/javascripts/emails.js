@@ -1,6 +1,12 @@
 $(document).ready(function() {
     dialogMsg();
     validateEmail();
+    $('#received').DataTable({
+        responsive: true
+    });
+    $('#send').DataTable({
+        responsive: true
+    });
 });
 function validateEmail() {
     $("#new_email").validate({
@@ -36,7 +42,6 @@ function dialogMsg() {
             dialog.dialog( "close" );
         }
     });
-
     $( "#open_new_msg_dialog" ).click(function() {
         dialog.dialog( "open" );
     });

@@ -34,3 +34,4 @@ gem 'ckeditor'
 gem 'paperclip'
 gem "unicorn-rails"
 gem 'sprockets-rails', :require => 'sprockets/railtie'
+gem 'jquery-datatables-rails', '~> 3.0.0'
