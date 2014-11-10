@@ -29,6 +29,14 @@ class GroupEmailsController < ApplicationController
     @group_email.sender_id = current_user.id
     respond_to do |format|
       if @group_email.save
+        if current_user.has_role? :admin
+          @last_group_email = GroupEmail.select("id").last
+          @last_group_email_recipients = GroupEmailRecipient.to_group_email(@last_group_email.id).all
+          @last_group_email_recipients.each do |i|
+          user = User.user(i.recipient.id).last
+          UserNotifier.notify(user).deliver
+          end
+        end
         format.html { redirect_to @group_email, notice: 'Group email was successfully created.' }
         format.json { render :show, status: :created, location: @group_email }
       else

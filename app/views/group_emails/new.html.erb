@@ -1,1 +1,10 @@
+<%= @last_group_email = GroupEmail.select("id").last %>
+<%= @last_group_email_recipients = GroupEmailRecipient.to_group_email(@last_group_email.id).all %>
+
 <%= render :partial => 'form' %>
+
+<%
+   n = Array.new
+   n = @last_group_email_recipients.each do |i| %>
+    <%= i.recipient.id %>
+<% end %>
