@@ -41,7 +41,7 @@ function dialogMsg() {
         }
     });
 
-    $( "#create-user" ).button().on( "click", function() {
+    $( "#open_new_msg_dialog" ).click(function() {
         dialog.dialog( "open" );
     });
 }
