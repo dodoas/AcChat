@@ -37,22 +37,22 @@
                   <% end %>
           </tr>
       <% end %>
-      <% @group_emails.each do |group_email| %>
+      <%# @group_emails.each do |group_email| %>
           <tr>
-            <td><%= link_to group_email.message_subject, group_email_path(group_email) %></td>
-            <td><%= group_email.sender.email %></td>
-            <td><%=l group_email.created_at %></td>
-            <% if current_user.has_role? :admin %>
+            <td><%#= link_to group_email.message_subject, group_email_path(group_email) %></td>
+            <td><%#= group_email.sender.email %></td>
+            <td><%#=l group_email.created_at %></td>
+            <%# if current_user.has_role? :admin %>
             <td>
-              <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              <%#= link_to t('.destroy', :default => t("helpers.links.destroy")),
                           group_email_path(group_email),
                           :method => :delete,
                           :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                           :class => 'btn btn-xs btn-danger' %>
             </td>
-                <% end %>
+                <%# end %>
           </tr>
-      <% end %>
+      <%# end %>
       </tbody>
     </table>
       </div>
@@ -96,10 +96,3 @@
   <div id="dialog-form" title="Create new message">
     <%= render :partial => 'emails/form' %>
   </div>
-
-
-  <% @group_emails.group_email_recipients.each do |r| %>
-      <tr>
-        <td><%= r.recipient_id %></td>
-      </tr>
-  <% end %>

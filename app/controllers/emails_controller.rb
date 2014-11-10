@@ -6,7 +6,11 @@ class EmailsController < ApplicationController
     @emails_Received = Email.received_messages(current_user.id).all
     @emails_Send = Email.send_messages(current_user.id).all
     @email = Email.new
-    @group_emails = GroupEmail.all
+    #TODO DA SE SVE PODESI DRUKCIJE
+    #TODO SUTRA KADA AMINUJE ARNT
+    #@group_emails = GroupEmail.group_email_recipients.where("recipient_id LIKE ?", current_user.id).all
+    #TODO LOGIKA MI JE OD POCETKA GLUPA PA ZATO SAD OVO NE RADI!!!!!!!!!!!!!
+    #TODO ZA PRIKAZ GRUPNIH PORUKA
   end
 
   def show
@@ -20,6 +24,8 @@ class EmailsController < ApplicationController
   end
 
   def create
+    #TODO DA SE PREPRAVI DA I ZA SINGLE I GRUPNE I SVE BUDE NA JEDNOJ STRANICI!!!!!!
+    #TODO TO OSTAJE ZA SUTRA SAD SAM PRSO VISE OD OVU GLUPOST!!!
     @email = Email.new(email_params)
     @email.sender_id = current_user.id
     respond_to do |format|
