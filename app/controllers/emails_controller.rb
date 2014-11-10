@@ -29,11 +29,11 @@ class EmailsController < ApplicationController
         user = User.user(user_in_last_post).last
         UserNotifier.notify(user).deliver
         end
-        format.html { redirect_to @email, notice: 'Email was successfully created.' }
-        format.json { render :show, status: :created, location: @email }
+        response = { :status => 1, :msg => "Success!"}
+        format.json  { render :json => response }
       else
-        format.html { render :new }
-        format.json { render json: @email.errors, status: :unprocessable_entity }
+        response = { :status => 0, :msg => "Error!"}
+        format.json  { render :json => response }
       end
     end
   end

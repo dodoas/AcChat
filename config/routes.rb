@@ -13,15 +13,6 @@ Rails.application.routes.draw do
   root 'dashboard#index'
   match ':controller(/:action(/:id))', :via => [:get, :post]
 
-  ########################################################################################
-  ##                                                                                    ##
-  ##                          AJAX APIS                                                 ##
-  ##                                                                                    ##
-  ########################################################################################
-
-  namespace :api do
-    post 'email/save'
-    get 'email/save'
-  end
+  post 'emails/create'
 
 end

@@ -4,8 +4,6 @@ $(document).ready(function() {
 });
 function validateEmail() {
     $("#new_email").validate({
-
-
         rules: {
             "email[message_subject]": {required: true},
             "email[message_body]": {required: true}
@@ -14,11 +12,9 @@ function validateEmail() {
             "email[message_subject]": {required: "Please Enter Message Subject!"},
             "email[message_body]": {required: "Please Enter Message Body"}
         },
-        submitHandler: function(form) {
+        submitHandler: function() {
             saveMessage();
-            $("#dialog-form").dialog( "close" );
         }
-
     });
 }
 function dialogMsg() {
@@ -29,7 +25,7 @@ function dialogMsg() {
         width: 750,
         modal: true,
         buttons: {
-            "Create an account": function() {
+            "Create new message": function() {
                 $("#new_msg_click").trigger( "click" );
             },
             Cancel: function() {
@@ -45,26 +41,22 @@ function dialogMsg() {
         dialog.dialog( "open" );
     });
 }
-
 function saveMessage() {
     $.ajax({
-        url: 'create',
-        data: $(form).serialize(),
+        url: 'emails',
+        data: $("#new_email").serialize(),
         dataType: "json",
         type: "POST",
-        beforeSend: function () {
+        beforeSend: function(response) {
         },
-        success: function (response) {
-            $("#test").append(response);
-        },
-        complete: function (response) {
+        success: function(response) {
 
         },
-        error: function (response) {
-
+        complete: function(response) {
+            $("#dialog-form").dialog( "close" );
+        },
+        error: function(response) {
             alert("Ajax error");
-
         }
     });
-
 }
