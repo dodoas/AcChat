@@ -6,6 +6,7 @@ class EmailsController < ApplicationController
     @emails_Received = Email.received_messages(current_user.id).all
     @emails_Send = Email.send_messages(current_user.id).all
     @email = Email.new
+    @group_emails = GroupEmail.all
   end
 
   def show

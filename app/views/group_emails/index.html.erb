@@ -18,10 +18,10 @@
       <tr>
         <td><%= link_to group_email.id, group_email_path(group_email) %></td>
         <td><%= group_email.message_subject %></td>
-        <td><%= @recipients.to_group_email(group_email.id).each do |r| %>
-          <%= r.recipient.email.to_s %>
-          <%= r.recipient.first_name.to_s %>
-              <%= r.recipient.last_name.to_s %>
+        <td><%= group_email.message_body %></td>
+        <td><%= group_email.sender_id %></td>
+        <td><%= @group_emails_recipients.to_group_email(group_email.id).each do |r| %>
+          <%= r.recipient.email %>
             <% end %>
               </td>
         <td><%=l group_email.created_at %></td>
