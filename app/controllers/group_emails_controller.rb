@@ -7,7 +7,7 @@ class GroupEmailsController < ApplicationController
 
     if current_user.has_role? :admin
       @group_emails = GroupEmail.all
-      @recipients = GroupEmailRecipient.select("recipient_id, group_email_id").all
+      @group_emails_recipients = GroupEmailRecipient.select("recipient_id, group_email_id").all
     else
       redirect_to_403
     end

@@ -96,3 +96,10 @@
   <div id="dialog-form" title="Create new message">
     <%= render :partial => 'emails/form' %>
   </div>
+
+
+  <% @group_emails.group_email_recipients.each do |r| %>
+      <tr>
+        <td><%= r.recipient_id %></td>
+      </tr>
+  <% end %>
