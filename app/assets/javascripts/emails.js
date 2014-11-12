@@ -55,7 +55,13 @@ function saveMessage() {
         beforeSend: function(response) {
         },
         success: function(response) {
-
+            if (0 === response.status) {
+                $("#error").show().fadeOut(3000);
+                $("#msg_error").append(response.msg);
+            } else {
+                $("#success").show().fadeOut(3000);
+                $("#msg_success").append(response.msg);
+            }
         },
         complete: function(response) {
             $("#dialog-form").dialog( "close" );

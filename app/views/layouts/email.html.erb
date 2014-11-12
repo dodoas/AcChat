@@ -129,7 +129,6 @@
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
   <%= render :partial => 'layouts_partials/top_nav' %>
 </nav>
-
 <div class="container">
   <div class="row">
     <% if current_user.has_role? :admin %>
@@ -146,6 +145,12 @@
     <% end %>
     <div class="col-sm-9 col-md-10">
     </div>
+  </div>
+  <div id="success" class="alert alert-success" role="alert">
+    <strong id="msg_success"></strong>
+  </div>
+  <div id="error" class="alert alert-danger" role="alert">
+    <strong id="msg_error"></strong>
   </div>
   <hr>
   <div class="row">
